@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 9006187981667528558}
+  _collider: {fileID: 5183014050145923002}
   _inputVectorYClampMin: 0.1
   _inputVectorsClampMax: 1
   _xMultiplier: 100
@@ -172,7 +173,7 @@ MonoBehaviour:
   _rigidbodySettingsAfterCollision:
     AngularDrag: 20
     Drag: 20
-  _destroyDelay: 2
+  _destroyDelay: 1.5
 --- !u!54 &9006187981667528558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,5 +220,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.05, y: 1.84, z: 0.11}
+  m_Size: {x: 1.7823038, y: 1.7741933, z: 0.064831585}
   m_Center: {x: 0, y: 0, z: 0}
