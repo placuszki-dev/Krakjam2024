@@ -18,6 +18,9 @@ public class Cat : MonoBehaviour
     public Material[] _catMAt;
     public SkinnedMeshRenderer _catRenderer;
 
+    public AudioSource _catAudio;
+    public AudioClip[] _catClip;
+
     [Space]
     public Animator _animator;
     public float _deadDelay = 2f;
@@ -52,7 +55,8 @@ public class Cat : MonoBehaviour
         _animator.SetFloat("speed", 0);
         _animator.SetTrigger("stop");
         _catFaceImage.sprite = _catSprites[UnityEngine.Random.Range(0, _catSprites.Length)];
-
+        _catAudio.clip = _catClip[UnityEngine.Random.Range(0, _catClip.Length)];
+        _catAudio.Play();
         StartCoroutine(DeadDelay());
     }
 
