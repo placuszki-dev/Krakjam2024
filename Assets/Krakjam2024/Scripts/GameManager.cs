@@ -141,7 +141,8 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < _activeCats.Count; i++)
         {
-            _activeCats[i].DestroyCat();
+            var cat = _activeCats[i];
+            cat.DestroyCat();
         }
 
         _activeCats.Clear();
@@ -149,9 +150,21 @@ public class GameManager : MonoBehaviour
 
     private void CreateCat()
     {
+        _catprefab.SetActive(true); // Stupid hack
         var obj = Instantiate(_catprefab);
+        _catprefab.SetActive(false); // Stupid hack
+        
         obj.transform.position = _catSpawners[UnityEngine.Random.Range(0, _catSpawners.Length)].position;
-        obj.GetComponent<Cat>().Init();
+
+        Cat cat = obj.GetComponent<Cat>();
+        cat.Init();
+        cat.OnCatDestroyed += OnCatDestroyed;
+        _activeCats.Add(cat);
+    }
+
+    private void OnCatDestroyed(Cat cat)
+    {
+        _activeCats.Remove(cat);
     }
 
     public void CatHit(string playerID)
