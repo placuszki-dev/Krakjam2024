@@ -8,6 +8,7 @@ public enum GamePhase
 {
     Menu = 0,
     Play = 1,
+    EndGame = 3,
 }
 
 public class GameManager : MonoBehaviour
@@ -81,10 +82,22 @@ public class GameManager : MonoBehaviour
     [ContextMenu("StopGame")]
     private void StopGame()
     {
-        _ui.SetActive(true);
         _gamePhase = GamePhase.Menu;
+        
+        _ui.SetActive(true);
         PlayMusic();
         DestroyAllCats();
+    }
+    
+    private void EndGame()
+    {
+        _gamePhase = GamePhase.EndGame;
+        
+        DestroyAllCats();
+        _players.Clear();
+        _colors.Clear();
+
+        PlayMusic();
     }
     
     private void PlayMusic()
@@ -126,7 +139,12 @@ public class GameManager : MonoBehaviour
     
     private void DestroyAllCats()
     {
-        // TODO: ..
+        for (int i = 0; i < _activeCats.Count; i++)
+        {
+            _activeCats[i].DestroyCat();
+        }
+
+        _activeCats.Clear();
     }
 
     private void CreateCat()
@@ -147,20 +165,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void EndGame()
-    {
-        for (int i = 0; i < _activeCats.Count; i++)
-        {
-            _activeCats[i].DestroyCat();
-        }
-
-        _activeCats.Clear();
-        _players.Clear();
-        _colors.Clear();
-
-        _gameMusic?.Stop();
-        _menuMusic?.Play();
-    }
+   
 
     private bool CheckIfSomeoneWin()
     {
