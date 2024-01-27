@@ -397,8 +397,12 @@ MonoBehaviour:
   _inner: {fileID: 5685351212282234979}
   _innerScaleTransform: {fileID: 4255579847497197881}
   _launcherTransform: {fileID: 8872293041261193127}
+  _view: {fileID: 3133600840995574240}
   _cheesePrefab: {fileID: 7924607575327469455, guid: afbd587d622712147a9764ba1e6cfdd3, type: 3}
   _cooldown: 0.5
+  _shakeStrength: 0.8
+  _shakeDuration: 0.2
+  _shakeVibrato: 20
 --- !u!1001 &6970555451689054293
 PrefabInstance:
   m_ObjectHideFlags: 0
