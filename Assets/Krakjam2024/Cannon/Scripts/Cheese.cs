@@ -9,15 +9,17 @@ namespace Placuszki.Krakjam2024
         [Header("References")] 
         [SerializeField] private Rigidbody _rigidbody;
 
-        [Header("Settings")]
+        [Header("Settings - trajectory")]
         [SerializeField] private float _inputVectorYClampMin = 0.1f;
         [SerializeField] private float _inputVectorsClampMax = 1;
         
+        [Header("Settings - trajectory")]
         [SerializeField] private float _xMultiplier = 100;
         [SerializeField] private float _yMultiplier = 100;
         [SerializeField] private float _minTorque = -0.1f;
         [SerializeField] private float _maxTorque = 0.1f;
-        [SerializeField] private RigidbodySettings _rigidbodySettingsAfterColision;
+        [SerializeField] private RigidbodySettings _rigidbodySettingsAfterCollision;
+        [SerializeField] private float _destroyDelay = 3f;
 
         public void Launch(float xVector, float yVector)
         {
@@ -44,23 +46,24 @@ namespace Placuszki.Krakjam2024
 
         private void OnCollisionEnter(Collision other)
         {
-            SetRigidbodyValuesAfterCollision();
+            SetRigidbodyValuesAfterCollision(other);
+            Destroy(gameObject, _destroyDelay);
         }
 
-        private void SetRigidbodyValuesAfterCollision()
+        private void SetRigidbodyValuesAfterCollision(Collision other)
         {
+            if(other.gameObject.GetComponent<Cheese>()) // cheese with cheese -> nothing happens
+                return;
             
-            _rigidbody.angularDrag = _rigidbodySettingsAfterColision.AngularDrag;
-            _rigidbody.drag = _rigidbodySettingsAfterColision.Drag;
-            _rigidbody.isKinematic = _rigidbodySettingsAfterColision.IsKinematic;
+            _rigidbody.angularDrag = _rigidbodySettingsAfterCollision.AngularDrag;
+            _rigidbody.drag = _rigidbodySettingsAfterCollision.Drag;
         }
     }
 
     [Serializable]
     public class RigidbodySettings
     {
-        public float AngularDrag = 1;
-        public float Drag = 1;
-        public bool IsKinematic = false;
+        public float AngularDrag = 20;
+        public float Drag = 20;
     }
 }
