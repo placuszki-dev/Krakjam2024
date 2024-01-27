@@ -1249,6 +1249,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _gameplayServiceConsumer: {fileID: 1392546639}
+  _useLocalhost: 1
 --- !u!1 &914280203
 GameObject:
   m_ObjectHideFlags: 0
