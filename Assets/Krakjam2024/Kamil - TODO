@@ -1,0 +1,15 @@
+Pilne:
+* Zintegrować z kotami
+* Cooldown 0.5s
+* Zrobić żeby gracz się pojawił od razu jak się podłączy do serwera
+
+
+
+Mniej pilne:
+
+* DOTween - telefon sie trzęsie jak strzela, może się przekręca w tę stronę co strzela?
+
+* Epic toon fx - gdy ser uderza w ściane
+* Epic toon fx - gdy ser się niszczy
+
+* Dźwięk splash gdy ser uderza w coś.
