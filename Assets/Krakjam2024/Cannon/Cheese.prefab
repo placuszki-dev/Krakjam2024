@@ -173,6 +173,7 @@ MonoBehaviour:
     AngularDrag: 20
     Drag: 20
   _destroyDelay: 1.5
+  _collisionParticle: {fileID: 193104, guid: c2f28a236b0696a4f90a994422019577, type: 3}
 --- !u!54 &9006187981667528558
 Rigidbody:
   m_ObjectHideFlags: 0
