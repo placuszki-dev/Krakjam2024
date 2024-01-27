@@ -23,6 +23,9 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private RigidbodySettings _rigidbodySettingsAfterCollision;
         [SerializeField] private float _destroyDelay = 3f;
 
+        [Header("SFX")]
+        [SerializeField] private AudioSource _sfx;
+
         private Player _player;
 
         public void Launch(Player player, float xVector, float yVector)
@@ -65,7 +68,10 @@ namespace Placuszki.Krakjam2024
         {
             if(other.gameObject.GetComponent<Cheese>()) // cheese with cheese -> nothing happens
                 return;
-            
+
+            _sfx.pitch = Random.Range(0.7f, 1.2f);
+            _sfx.Play();
+
             _rigidbody.angularDrag = _rigidbodySettingsAfterCollision.AngularDrag;
             _rigidbody.drag = _rigidbodySettingsAfterCollision.Drag;
         }
