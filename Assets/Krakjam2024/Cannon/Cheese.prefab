@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 441948939365852669}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.7071064, y: -0, z: -0, w: 0.7071072}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.7778, y: 0.06464792, z: 1.7778}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6278053390202409527}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &7221309408028988179
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -163,8 +163,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 9006187981667528558}
-  _xMultiplier: 1
-  _yMultiplier: 11.31
+  _inputVectorYClampMin: 0.1
+  _inputVectorsClampMax: 1
+  _xMultiplier: 100
+  _yMultiplier: 110.8
+  _minTorque: -0.3
+  _maxTorque: 0.3
+  _rigidbodySettingsAfterCollision:
+    AngularDrag: 20
+    Drag: 20
+  _destroyDelay: 2
 --- !u!54 &9006187981667528558
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,7 +183,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -211,5 +219,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 0.11, z: 1}
+  m_Size: {x: 2.05, y: 1.84, z: 0.11}
   m_Center: {x: 0, y: 0, z: 0}
