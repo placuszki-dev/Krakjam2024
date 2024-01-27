@@ -1,4 +1,5 @@
-﻿using Placuszki.Krakjam2024.Server;
+﻿using Placuszki.Krakjam2024.Scripts;
+using Placuszki.Krakjam2024.Server;
 using UnityEngine;
 
 namespace Placuszki.Krakjam2024
@@ -22,6 +23,7 @@ namespace Placuszki.Krakjam2024
             Debug.Log(dataPacket.Y);
 
             SetColor(dataPacket.PhoneColor);
+            GameManager.Instance.RegisterPlayer(dataPacket);
             Shoot(dataPacket.X, dataPacket.Y);
         }
 
@@ -32,24 +34,18 @@ namespace Placuszki.Krakjam2024
             cheese.transform.localPosition = Vector3.zero;
             cheese.transform.localRotation = Quaternion.identity;
             
-            cheese.Launch(x, y);
+            cheese.Launch(this, x, y);
         }
 
         private void SetColor(string hexColor)
         {
-            Color newColor = HexToColor(hexColor);
+            Color newColor = ColorParser.HexToColor(hexColor);
             _inner.material.color = newColor;
         }
 
-        private static Color HexToColor(string hex)
+        public string GetPlayerId()
         {
-            if (ColorUtility.TryParseHtmlString(hex, out var color))
-            {
-                return color;
-            }
-
-            Debug.LogError("Invalid hex color: " + hex);
-            return Color.white;
+            return "gowno";
         }
     }
 }
