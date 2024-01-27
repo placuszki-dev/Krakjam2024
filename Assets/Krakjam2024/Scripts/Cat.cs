@@ -8,40 +8,56 @@ using UnityEngine.AI;
 
 public class Cat : MonoBehaviour
 {
-    public event Action OnHit;   
+    public event Action OnHit;
+
+    public NavMeshSurface _surface;
+    public NavMeshAgent _agent;
+    public GameObject _deadParticle;
+    [Space]
+    public Animator _animator;
+    public float _endRunSpeed = 20f;
 
 
-    public NavMeshSurface surface;
-    NavMeshData data;
-    public NavMeshAgent agent;
-
-    public Animator animator;
-
-    float timer;
+    private float _timer;
+    private NavMeshData _data;
+    //cheese cheese cheese!
+    bool _cheese;
 
     Vector3 destination;
 
 
+    public void Hit(int playerID)
+    {
+        if (_cheese)
+            return;
+
+        var part = Instantiate(_deadParticle);
+        part.GetComponent<ParticleSystem>().Play();
+
+        Destroy(this.gameObject);
+    }
+
     void Start()
     {
-        data = surface.navMeshData;
-        agent.destination = SetRandomDest(data.sourceBounds);
-        timer = 0;
+        _data = _surface.navMeshData;
+        _agent.destination = SetRandomDest(_data.sourceBounds);
+        _timer = 0;
     }
 
 
-
-    //Update destination every 5 seconds to test
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer > 5)
-        {
-            agent.destination = SetRandomDest(data.sourceBounds);
-            timer = 0;
-        }
+        _animator.SetFloat("speed", _agent.velocity.magnitude / _agent.speed);
 
-        animator.SetFloat("speed", agent.velocity.magnitude / agent.speed);
+        if (_cheese)
+            return;
+
+        _timer += Time.deltaTime;
+        if (_timer > 5)
+        {
+            _agent.destination = SetRandomDest(_data.sourceBounds);
+            _timer = 0;
+        }
     }
 
     Vector3 SetRandomDest(Bounds bounds)
@@ -52,5 +68,4 @@ public class Cat : MonoBehaviour
         destination = new Vector3(x, 1, z);
         return destination;
     }
-
 }
