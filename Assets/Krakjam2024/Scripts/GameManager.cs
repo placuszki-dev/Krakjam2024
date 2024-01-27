@@ -41,13 +41,10 @@ public class GameManager : MonoBehaviour
         _menuMusic?.Play();
     }
 
-    public void RegisterPlayers(string playerID)
-    {
-        _players.Add(playerID, 0);
-    }
-
     public void CatHit(string playerID)
     {
+        _players.TryAdd(playerID, 0);
+
         int playerPoints = _players[playerID];
         _players[playerID] = playerPoints + 1;
 

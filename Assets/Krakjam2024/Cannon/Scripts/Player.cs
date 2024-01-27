@@ -32,7 +32,7 @@ namespace Placuszki.Krakjam2024
             cheese.transform.localPosition = Vector3.zero;
             cheese.transform.localRotation = Quaternion.identity;
             
-            cheese.Launch(x, y);
+            cheese.Launch(this, x, y);
         }
 
         private void SetColor(string hexColor)
@@ -50,6 +50,11 @@ namespace Placuszki.Krakjam2024
 
             Debug.LogError("Invalid hex color: " + hex);
             return Color.white;
+        }
+
+        public string GetPlayerId()
+        {
+            return "gowno";
         }
     }
 }
