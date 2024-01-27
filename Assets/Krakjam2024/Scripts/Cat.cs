@@ -10,8 +10,6 @@ using static UnityEngine.UI.CanvasScaler;
 
 public class Cat : MonoBehaviour
 {
-    public event Action<int> OnHit;
-
     public NavMeshSurface _surface;
     public NavMeshAgent _agent;
     public GameObject _deadParticle;
@@ -42,8 +40,7 @@ public class Cat : MonoBehaviour
         if (_cheese)
             return;
 
-        OnHit?.Invoke(playerID);
-
+        GameManager.Instance.CatHit(playerID);
 
         _agent.speed = 0;
         _catBubble.gameObject.SetActive(true);
