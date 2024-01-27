@@ -25,12 +25,13 @@ public class Cat : MonoBehaviour
     private NavMeshData _data;
     //cheese cheese cheese!
     bool _cheese;
+    bool _activated;
 
     Vector3 destination;
 
 
     [ContextMenu("hit")]
-    void Test()
+    void TestHit()
     {
         Hit(1);
     }
@@ -51,17 +52,19 @@ public class Cat : MonoBehaviour
         StartCoroutine(DeadDelay());
     }
 
+    [ContextMenu("Init")]
     public void Init()
     {
         _data = _surface.navMeshData;
         _agent.destination = SetRandomDest(_data.sourceBounds);
         _timer = 0;
+        _activated = true;
     }
 
 
     void Update()
     {
-        if (_cheese)
+        if (_cheese || !_activated)
             return;
 
         _animator.SetFloat("speed", _agent.velocity.magnitude / _agent.speed);
