@@ -32,6 +32,11 @@ public class Cat : MonoBehaviour
 
 
     [ContextMenu("hit")]
+    void Test()
+    {
+        Hit(1);
+    }
+
     public void Hit(int playerID)
     {
         if (_cheese)
