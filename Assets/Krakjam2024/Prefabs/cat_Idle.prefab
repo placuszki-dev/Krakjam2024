@@ -2786,6 +2786,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e5e421f6e0fed7c4ca342db0b42ab029, type: 3}
   - {fileID: 21300000, guid: 0e748ef9d7d04d64fb5b3fcf4a5f0f2d, type: 3}
   - {fileID: 21300000, guid: c62c9f5a0f48b7942aef987a9591934c, type: 3}
+  _catMAt:
+  - {fileID: 2100000, guid: 27ec793d5e225144dbed106b3b69483a, type: 2}
+  - {fileID: 2100000, guid: 5b4acdfaaa215b344b2d34a320717202, type: 2}
+  - {fileID: 2100000, guid: 85e786a6c77d02a43871701ee9cf69d8, type: 2}
+  - {fileID: 2100000, guid: 55473443ceaca2b4f973441a80a8ef73, type: 2}
+  _catRenderer: {fileID: 2669142087111044486}
   _animator: {fileID: 2178382304523723172}
   _deadDelay: 2
 --- !u!195 &6785417195247481617
@@ -7923,7 +7929,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 27ec793d5e225144dbed106b3b69483a, type: 2}
+  - {fileID: 2100000, guid: 55473443ceaca2b4f973441a80a8ef73, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

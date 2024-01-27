@@ -16,6 +16,9 @@ public class Cat : MonoBehaviour
     public GameObject _catBubble;
     public Image _catFaceImage;
     public Sprite[] _catSprites;
+    public Material[] _catMAt;
+    public SkinnedMeshRenderer _catRenderer;
+
     [Space]
     public Animator _animator;
     public float _deadDelay = 2f;
@@ -61,6 +64,8 @@ public class Cat : MonoBehaviour
         _agent.destination = SetRandomDest(_data.sourceBounds);
         _timer = 0;
         _activated = true;
+
+        _catRenderer.material = _catMAt[UnityEngine.Random.Range(0, _catMAt.Length)];
     }
 
 
