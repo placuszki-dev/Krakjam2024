@@ -12,6 +12,7 @@ public class CheeseDamageReceiver : MonoBehaviour
       {
          var playerId = cheese.GetPlayerId();
          _cat.Hit(playerId);
+         cheese.transform.SetParent(transform);
       }
    }
 }
