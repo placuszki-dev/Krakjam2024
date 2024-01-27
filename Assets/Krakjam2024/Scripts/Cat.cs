@@ -51,7 +51,7 @@ public class Cat : MonoBehaviour
         StartCoroutine(DeadDelay());
     }
 
-    void Start()
+    public void Init()
     {
         _data = _surface.navMeshData;
         _agent.destination = SetRandomDest(_data.sourceBounds);
