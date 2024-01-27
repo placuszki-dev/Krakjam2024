@@ -21,8 +21,11 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private RigidbodySettings _rigidbodySettingsAfterCollision;
         [SerializeField] private float _destroyDelay = 3f;
 
-        public void Launch(float xVector, float yVector)
+        private Player _player;
+
+        public void Launch(Player player, float xVector, float yVector)
         {
+            _player = player;
             // Force
             xVector = Mathf.Clamp(xVector, -_inputVectorsClampMax, _inputVectorsClampMax);
             yVector = Mathf.Clamp(yVector, _inputVectorYClampMin, _inputVectorsClampMax);
@@ -57,6 +60,11 @@ namespace Placuszki.Krakjam2024
             
             _rigidbody.angularDrag = _rigidbodySettingsAfterCollision.AngularDrag;
             _rigidbody.drag = _rigidbodySettingsAfterCollision.Drag;
+        }
+
+        public string GetPlayerId()
+        {
+            return _player.GetPlayerId();
         }
     }
 

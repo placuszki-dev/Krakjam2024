@@ -23,7 +23,7 @@ namespace Placuszki.Krakjam2024
             _gameplayServiceConsumer.OnDataPacketReceived += HandleDataPacket;
         }
 
-        private void HandleDataPacket(DataPacket dataPacket)
+        public void HandleDataPacket(DataPacket dataPacket)
         {
             string playerId = dataPacket.PlayerId;
             var player = _players.FirstOrDefault(p => p.Id.Equals(playerId));
