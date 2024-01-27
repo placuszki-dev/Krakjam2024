@@ -167,12 +167,12 @@ MonoBehaviour:
   _inputVectorsClampMax: 1
   _xMultiplier: 100
   _yMultiplier: 110.8
-  _minTorque: -0.1
-  _maxTorque: 0.1
-  _rigidbodySettingsAfterColision:
+  _minTorque: -0.3
+  _maxTorque: 0.3
+  _rigidbodySettingsAfterCollision:
     AngularDrag: 20
-    Drag: 19.5
-    IsKinematic: 0
+    Drag: 20
+  _destroyDelay: 2
 --- !u!54 &9006187981667528558
 Rigidbody:
   m_ObjectHideFlags: 0
