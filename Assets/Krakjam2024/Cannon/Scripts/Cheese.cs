@@ -6,6 +6,8 @@ namespace Placuszki.Krakjam2024
 {
     public class Cheese : MonoBehaviour
     {
+        public bool IsDeadly { get; private set; } = true;
+
         [Header("References")] 
         [SerializeField] private Rigidbody _rigidbody;
 
@@ -49,10 +51,16 @@ namespace Placuszki.Krakjam2024
 
         private void OnCollisionEnter(Collision other)
         {
+            var cheeseDamageReceiver = other.gameObject.GetComponent<CheeseDamageReceiver>();
+            if (!cheeseDamageReceiver)
+            {
+                IsDeadly = false;
+            }
+
             SetRigidbodyValuesAfterCollision(other);
             Destroy(gameObject, _destroyDelay);
         }
-
+        
         private void SetRigidbodyValuesAfterCollision(Collision other)
         {
             if(other.gameObject.GetComponent<Cheese>()) // cheese with cheese -> nothing happens

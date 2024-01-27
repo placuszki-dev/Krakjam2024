@@ -8,10 +8,11 @@ public class CheeseDamageReceiver : MonoBehaviour
    private void OnCollisionEnter(Collision other)
    {
       var cheese = other.gameObject.GetComponent<Cheese>();
-      if (cheese)
+      if (cheese && cheese.IsDeadly)
       {
          var playerId = cheese.GetPlayerId();
          _cat.Hit(playerId);
+         cheese.transform.SetParent(transform);
       }
    }
 }

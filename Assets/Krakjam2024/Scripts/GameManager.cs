@@ -107,7 +107,7 @@ public class GameManager : MonoBehaviour
         {
             if (_players.ElementAt(i).Value >= _pointsToWin)
             {
-                OnEndGame.Invoke(_players.ElementAt(i).Key);
+                OnEndGame?.Invoke(_players.ElementAt(i).Key);
                 EndGame();
                 return true;
             }
