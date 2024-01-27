@@ -2740,6 +2740,7 @@ Transform:
   - {fileID: 3172594692963510859}
   - {fileID: 8930620310119128945}
   - {fileID: 3652887589237133536}
+  - {fileID: 4368428702906767015}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &2178382304523723172
@@ -4502,6 +4503,97 @@ Transform:
   - {fileID: 5761618514258974176}
   m_Father: {fileID: 7928110763473484406}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3981948642897369110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4368428702906767015}
+  - component: {fileID: 380967909025623900}
+  - component: {fileID: 4188593124178981708}
+  - component: {fileID: 6165809753005305836}
+  m_Layer: 0
+  m_Name: CheeseDamageReceiver - sphere and cylinder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4368428702906767015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981948642897369110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.363, z: -0.054}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6140511590470113771}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &380967909025623900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981948642897369110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518c616f0b38c9246830141fdfde7696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cat: {fileID: 8659772079310553788}
+--- !u!135 &4188593124178981708
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981948642897369110}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.21
+  m_Center: {x: 0, y: 0.22, z: 0.42}
+--- !u!136 &6165809753005305836
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981948642897369110}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.14110777
+  m_Height: 0.54225254
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.0473305, z: 0.03344571}
 --- !u!1 &4040762746023632469
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,15 +6585,15 @@ GameObject:
   m_Component:
   - component: {fileID: 3652887589237133536}
   - component: {fileID: 4683782092311353421}
-  - component: {fileID: 2720555253399410065}
-  - component: {fileID: 6478916878291006950}
+  - component: {fileID: 1367703546976652975}
+  - component: {fileID: 3188765874371925211}
   m_Layer: 0
-  m_Name: CheeseDamageReceiver
+  m_Name: CheeseDamageReceiver - boxes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3652887589237133536
 Transform:
   m_ObjectHideFlags: 0
@@ -6530,8 +6622,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cat: {fileID: 8659772079310553788}
---- !u!135 &2720555253399410065
-SphereCollider:
+--- !u!65 &1367703546976652975
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6549,10 +6641,10 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.24
-  m_Center: {x: 0, y: 0.18, z: 0.39}
---- !u!136 &6478916878291006950
-CapsuleCollider:
+  m_Size: {x: 0.38154882, y: 0.40503433, z: 0.38546407}
+  m_Center: {x: -0.003913922, y: 0.21136825, z: 0.4246946}
+--- !u!65 &3188765874371925211
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -6569,11 +6661,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.21
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  serializedVersion: 3
+  m_Size: {x: 0.3255918, y: 0.27491388, z: 0.49321893}
+  m_Center: {x: -0.0038985643, y: 0.046779633, z: 0.031186448}
 --- !u!1 &5415684377126615249
 GameObject:
   m_ObjectHideFlags: 0
