@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Krakjam2024.Scripts;
+using Placuszki.Krakjam2024.Scripts;
 using Placuszki.Krakjam2024.Server;
 using UnityEngine;
 
@@ -23,7 +23,7 @@ namespace Placuszki.Krakjam2024
             _gameplayServiceConsumer.OnDataPacketReceived += HandleDataPacket;
         }
 
-        private void HandleDataPacket(DataPacket dataPacket)
+        public void HandleDataPacket(DataPacket dataPacket)
         {
             string playerId = dataPacket.PlayerId;
             var player = _players.FirstOrDefault(p => p.Id.Equals(playerId));
