@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private List<Cat> _activeCats;
 
-    public void CatHit(int playerID)
+    public void CatHit(string playerID)
     {
         CreateCat();
     }

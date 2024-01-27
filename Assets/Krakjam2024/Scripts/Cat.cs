@@ -33,10 +33,10 @@ public class Cat : MonoBehaviour
     [ContextMenu("hit")]
     void TestHit()
     {
-        Hit(1);
+        Hit("1");
     }
 
-    public void Hit(int playerID)
+    public void Hit(string playerID)
     {
         if (_cheese)
             return;
