@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Krakjam2024.Scripts;
+using Placuszki.Krakjam2024.Scripts;
 using Placuszki.Krakjam2024.Server;
 using UnityEngine;
 

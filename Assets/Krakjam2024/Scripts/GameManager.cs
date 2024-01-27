@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Placuszki.Krakjam2024.Server;
 
 public class GameManager : MonoBehaviour
 {
@@ -35,16 +36,21 @@ public class GameManager : MonoBehaviour
 
     private List<Cat> _activeCats = new List<Cat>();
     private Dictionary<string, int> _players = new Dictionary<string, int>();
+    private Dictionary<string, string> _colors = new Dictionary<string, string>();
 
     private void Start()
     {
         _menuMusic?.Play();
     }
 
+    public void RegisterPlayer(DataPacket dataPacket)
+    {
+        _players.TryAdd(dataPacket.PlayerId, 0);
+        _colors.TryAdd(dataPacket.PlayerId, dataPacket.PhoneColor);
+    }
+    
     public void CatHit(string playerID)
     {
-        _players.TryAdd(playerID, 0);
-
         int playerPoints = _players[playerID];
         _players[playerID] = playerPoints + 1;
 
@@ -83,6 +89,7 @@ public class GameManager : MonoBehaviour
 
         _activeCats.Clear();
         _players.Clear();
+        _colors.Clear();
 
         _gameMusic?.Stop();
         _menuMusic?.Play();

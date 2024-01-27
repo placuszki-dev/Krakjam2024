@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Krakjam2024.Scripts
+namespace Placuszki.Krakjam2024.Scripts
 {
     public static class Extensions
     {
