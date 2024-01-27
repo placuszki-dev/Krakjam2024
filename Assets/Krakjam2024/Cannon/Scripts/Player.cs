@@ -1,5 +1,4 @@
-﻿using Placuszki.Krakjam2024.Scripts;
-using Placuszki.Krakjam2024.Server;
+﻿using Placuszki.Krakjam2024.Server;
 using UnityEngine;
 
 namespace Placuszki.Krakjam2024
@@ -14,6 +13,11 @@ namespace Placuszki.Krakjam2024
 
         [Header("Prefabs")]
         [SerializeField] private Cheese _cheesePrefab;
+
+        private void OnDestroy()
+        {
+            GameManager.Instance.DeregisterPlayer(Id);
+        }
 
         public void HandleDataPacket(DataPacket dataPacket)
         {
@@ -45,7 +49,7 @@ namespace Placuszki.Krakjam2024
 
         public string GetPlayerId()
         {
-            return "gowno";
+            return Id;
         }
     }
 }

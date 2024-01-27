@@ -49,6 +49,12 @@ public class GameManager : MonoBehaviour
         _colors.TryAdd(dataPacket.PlayerId, dataPacket.PhoneColor);
     }
     
+    public void DeregisterPlayer(string id)
+    {
+        _players.Remove(id);
+        _colors.Remove(id);
+    }
+    
     public void CatHit(string playerID)
     {
         int playerPoints = _players[playerID];
