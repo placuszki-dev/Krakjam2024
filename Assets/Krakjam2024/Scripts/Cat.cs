@@ -24,7 +24,7 @@ public class Cat : MonoBehaviour
     private float _timer;
     private NavMeshData _data;
     //cheese cheese cheese!
-    bool _cheese;
+    bool _alreadyHit;
     bool _activated;
 
     Vector3 destination;
@@ -38,8 +38,10 @@ public class Cat : MonoBehaviour
 
     public void Hit(string playerID)
     {
-        if (_cheese)
+        if (_alreadyHit)
             return;
+        
+        _alreadyHit = true;
 
         GameManager.Instance.CatHit(playerID);
 
@@ -64,7 +66,7 @@ public class Cat : MonoBehaviour
 
     void Update()
     {
-        if (_cheese || !_activated)
+        if (_alreadyHit || !_activated)
             return;
 
         _animator.SetFloat("speed", _agent.velocity.magnitude / _agent.speed);
