@@ -93,6 +93,11 @@ public class Cat : MonoBehaviour
         var part = Instantiate(_deadParticle);
         part.transform.position = transform.position;
 
+        DestroyCat();
+    }
+
+    public void DestroyCat()
+    {
         Destroy(this.gameObject);
     }
 }
