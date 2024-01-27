@@ -1,9 +1,14 @@
-using Placuszki.Krakjam2024;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Placuszki.Krakjam2024.Server;
+
+public enum GamePhase
+{
+    Menu = 0,
+    Play = 1,
+}
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +30,7 @@ public class GameManager : MonoBehaviour
     public event Action OnStartGame;
     public event Action<string> OnEndGame;
 
+    public GameObject _ui;
     public GameObject _catprefab;
     public Transform[] _catSpawners;
     public int _catCount = 5;
@@ -38,9 +44,64 @@ public class GameManager : MonoBehaviour
     private Dictionary<string, int> _players = new Dictionary<string, int>();
     private Dictionary<string, string> _colors = new Dictionary<string, string>();
 
+    private GamePhase _gamePhase;
     private void Start()
     {
-        _menuMusic?.Play();
+        PlayMusic();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            switch (_gamePhase)
+            {
+                case GamePhase.Menu:
+                    StartGame();
+                    break;
+                case GamePhase.Play:
+                    StopGame();
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+
+    [ContextMenu("StartGame")]
+    public void StartGame()
+    {
+        _gamePhase = GamePhase.Play;
+        
+        _ui.SetActive(false);
+        PlayMusic();
+        CreateCats();
+    }
+
+    [ContextMenu("StopGame")]
+    private void StopGame()
+    {
+        _ui.SetActive(true);
+        _gamePhase = GamePhase.Menu;
+        PlayMusic();
+        DestroyAllCats();
+    }
+    
+    private void PlayMusic()
+    {
+        switch (_gamePhase)
+        {
+            case GamePhase.Menu:
+                _gameMusic?.Stop();
+                _menuMusic?.Play();
+                break;
+            case GamePhase.Play:
+                _gameMusic?.Play();
+                _menuMusic?.Stop();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void RegisterPlayer(DataPacket dataPacket)
@@ -48,13 +109,33 @@ public class GameManager : MonoBehaviour
         _players.TryAdd(dataPacket.PlayerId, 0);
         _colors.TryAdd(dataPacket.PlayerId, dataPacket.PhoneColor);
     }
-    
+
     public void DeregisterPlayer(string id)
     {
         _players.Remove(id);
         _colors.Remove(id);
     }
+
+    private void CreateCats()
+    {
+        for (int i = 0; i < _catCount; i++)
+        {
+            CreateCat();
+        }
+    }
     
+    private void DestroyAllCats()
+    {
+        // TODO: ..
+    }
+
+    private void CreateCat()
+    {
+        var obj = Instantiate(_catprefab);
+        obj.transform.position = _catSpawners[UnityEngine.Random.Range(0, _catSpawners.Length)].position;
+        obj.GetComponent<Cat>().Init();
+    }
+
     public void CatHit(string playerID)
     {
         int playerPoints = _players[playerID];
@@ -64,26 +145,6 @@ public class GameManager : MonoBehaviour
         {
             CreateCat();
         }
-
-    }
-
-    [ContextMenu("Start")]
-    public void StartGame()
-    {
-        _gameMusic?.Play();
-        _menuMusic?.Stop();
-
-        for (int i = 0; i < _catCount; i++)
-        {
-            CreateCat();
-        }
-    }
-
-    private void CreateCat()
-    {
-        var obj = Instantiate(_catprefab);
-        obj.transform.position = _catSpawners[UnityEngine.Random.Range(0, _catSpawners.Length)].position;
-        obj.GetComponent<Cat>().Init();
     }
 
     private void EndGame()
