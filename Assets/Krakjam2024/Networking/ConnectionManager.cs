@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR.Client;
 using Placuszki.Krakjam2024.Server;
@@ -21,6 +20,7 @@ namespace Placuszki.Krakjam2024
         public bool IsConnected { get; private set; }
 
         [SerializeField] private GameplayServiceConsumer _gameplayServiceConsumer;
+        [SerializeField] private bool _useLocalhost;
         private SignalRConnectionManager _connectionManager;
         private IGameHub _client;
         private Coroutine _startConnectionCoroutine;
@@ -171,8 +171,22 @@ namespace Placuszki.Krakjam2024
 
         private string GetConnectionString()
         {
-            string customServerIp = "217.182.74.11";
+            return _useLocalhost ? GetLocalConnectionString() : GetRemoteConnectionString();
+        }
+        
+        private string GetLocalConnectionString()
+        {
+            string customServerIp = "localhost";
             string port = "80";
+            string hub = "hubs/gamehub";
+
+            return $"http://{customServerIp}:{port}/{hub}";
+        }
+        
+        private string GetRemoteConnectionString()
+        {
+            string customServerIp = "217.182.74.11";
+            string port = "8080";
             string hub = "hubs/gamehub";
 
             return $"http://{customServerIp}:{port}/{hub}";
