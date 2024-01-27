@@ -5,17 +5,22 @@ using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
+using static UnityEngine.UI.CanvasScaler;
 
 public class Cat : MonoBehaviour
 {
-    public event Action OnHit;
+    public event Action<int> OnHit;
 
     public NavMeshSurface _surface;
     public NavMeshAgent _agent;
     public GameObject _deadParticle;
+    public GameObject _catBubble;
+    public Image _catFaceImage;
+    public Sprite[] _catSprites;
     [Space]
     public Animator _animator;
-    public float _endRunSpeed = 20f;
+    public float _deadDelay = 2f;
 
 
     private float _timer;
@@ -26,15 +31,22 @@ public class Cat : MonoBehaviour
     Vector3 destination;
 
 
+    [ContextMenu("hit")]
     public void Hit(int playerID)
     {
         if (_cheese)
             return;
 
-        var part = Instantiate(_deadParticle);
-        part.GetComponent<ParticleSystem>().Play();
+        OnHit?.Invoke(playerID);
 
-        Destroy(this.gameObject);
+
+        _agent.speed = 0;
+        _catBubble.gameObject.SetActive(true);
+        _animator.SetFloat("speed", 0);
+        _animator.SetTrigger("stop");
+        _catFaceImage.sprite = _catSprites[UnityEngine.Random.Range(0, _catSprites.Length)];
+
+        StartCoroutine(DeadDelay());
     }
 
     void Start()
@@ -47,10 +59,10 @@ public class Cat : MonoBehaviour
 
     void Update()
     {
-        _animator.SetFloat("speed", _agent.velocity.magnitude / _agent.speed);
-
         if (_cheese)
             return;
+
+        _animator.SetFloat("speed", _agent.velocity.magnitude / _agent.speed);
 
         _timer += Time.deltaTime;
         if (_timer > 5)
@@ -67,5 +79,15 @@ public class Cat : MonoBehaviour
 
         destination = new Vector3(x, 1, z);
         return destination;
+    }
+
+    IEnumerator DeadDelay()
+    {
+        yield return new WaitForSeconds(_deadDelay);
+
+        var part = Instantiate(_deadParticle);
+        part.transform.position = transform.position;
+
+        Destroy(this.gameObject);
     }
 }
