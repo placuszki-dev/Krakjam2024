@@ -1,4 +1,5 @@
-﻿using Placuszki.Krakjam2024.Server;
+﻿using DG.Tweening;
+using Placuszki.Krakjam2024.Server;
 using UnityEngine;
 
 namespace Placuszki.Krakjam2024
@@ -11,12 +12,18 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private MeshRenderer _inner;
         [SerializeField] private Transform _innerScaleTransform;
         [SerializeField] private Transform _launcherTransform;
+        [SerializeField] private Transform _view;
 
         [Header("Prefabs")]
         [SerializeField] private Cheese _cheesePrefab;
         
         [Header("Settings")]
         [SerializeField] private float _cooldown = 0.5f;
+        
+        [Header("Animations")]
+        [SerializeField] private float _shakeStrength = 0.1f;
+        [SerializeField] private float _shakeDuration = 0.2f;
+        [SerializeField] private int _shakeVibrato = 50;
 
         private float _cooldownLeft = 0;
 
@@ -51,6 +58,7 @@ namespace Placuszki.Krakjam2024
 
         private void Shoot(float x, float y)
         {
+            PlayShootAnimation(x, y);
             Cheese cheese = Instantiate(_cheesePrefab, _launcherTransform);
             
             cheese.transform.localPosition = Vector3.zero;
@@ -58,6 +66,11 @@ namespace Placuszki.Krakjam2024
             
             cheese.Launch(this, x, y);
             _cooldownLeft = _cooldown;
+        }
+
+        private void PlayShootAnimation(float x, float y)
+        {
+            _view.DOShakePosition(_shakeDuration, new Vector3(x, 0, y) * _shakeStrength, _shakeVibrato);
         }
 
         private void UpdateCooldownGfx()
