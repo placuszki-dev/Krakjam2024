@@ -1,15 +1,14 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using Unity.AI.Navigation;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-using static UnityEngine.UI.CanvasScaler;
 
 public class Cat : MonoBehaviour
 {
+    public event Action<Cat> OnCatDestroyed;
+
     public NavMeshSurface _surface;
     public NavMeshAgent _agent;
     public GameObject _deadParticle;
@@ -82,6 +81,11 @@ public class Cat : MonoBehaviour
             _agent.destination = SetRandomDest(_data.sourceBounds);
             _timer = 0;
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnCatDestroyed?.Invoke(this);
     }
 
     Vector3 SetRandomDest(Bounds bounds)
