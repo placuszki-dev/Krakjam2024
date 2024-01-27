@@ -1351,16 +1351,6 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!195 &767356858 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 6785417195247481617, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
-  m_PrefabInstance: {fileID: 998351044}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &767356860 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2178382304523723172, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
-  m_PrefabInstance: {fileID: 998351044}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &858059287
 GameObject:
   m_ObjectHideFlags: 0
@@ -1886,6 +1876,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: cat_Idle (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4066719985610356950, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 519420031}
     - target: {fileID: 6140511590470113771, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.82918
@@ -1927,25 +1921,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8659772079310553788, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
-      propertyPath: _agent
-      value: 
-      objectReference: {fileID: 767356858}
-    - target: {fileID: 8659772079310553788, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
-      propertyPath: surface
-      value: 
-      objectReference: {fileID: 1309912259}
-    - target: {fileID: 8659772079310553788, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
       propertyPath: _surface
       value: 
       objectReference: {fileID: 1309912259}
-    - target: {fileID: 8659772079310553788, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
-      propertyPath: _animator
-      value: 
-      objectReference: {fileID: 767356860}
-    - target: {fileID: 8659772079310553788, guid: 906ceaf4982905742987c24d0492d59f, type: 3}
-      propertyPath: _endRunDestPoints.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
