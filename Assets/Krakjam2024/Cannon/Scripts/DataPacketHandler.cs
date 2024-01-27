@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Placuszki.Krakjam2024.Scripts;
 using Placuszki.Krakjam2024.Server;
@@ -16,8 +15,6 @@ namespace Placuszki.Krakjam2024
 
         [SerializeField] private Transform _playerParentsContainer;
 
-        private readonly List<Player> _players = new();
-
         private void Awake()
         {
             _gameplayServiceConsumer.OnDataPacketReceived += HandleDataPacket;
@@ -26,11 +23,10 @@ namespace Placuszki.Krakjam2024
         public void HandleDataPacket(DataPacket dataPacket)
         {
             string playerId = dataPacket.PlayerId;
-            var player = _players.FirstOrDefault(p => p.Id.Equals(playerId));
+            Player player = FindObjectsOfType<Player>().FirstOrDefault(p => p.GetPlayerId().Equals(playerId));
             if (player == null)
             {
                 player = CreatePlayer(playerId);
-                _players.Add(player);
             }
 
             player.HandleDataPacket(dataPacket);
