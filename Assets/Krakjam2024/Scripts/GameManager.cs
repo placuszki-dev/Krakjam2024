@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,9 +22,11 @@ public class GameManager : MonoBehaviour
     public Transform[] _catSpawners;
     public int _catCount = 5;
 
+    private List<Cat> _activeCats;
+
     public void CatHit(int playerID)
     {
-
+        CreateCat();
     }
 
     [ContextMenu("Start")]
@@ -31,9 +34,14 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < _catCount; i++)
         {
-            var obj = Instantiate(_catprefab);
-            obj.transform.position = _catSpawners[UnityEngine.Random.Range(0, _catSpawners.Length)].position;
-            obj.GetComponent<Cat>().Init();
+            CreateCat();
         }
+    }
+
+    private void CreateCat()
+    {
+        var obj = Instantiate(_catprefab);
+        obj.transform.position = _catSpawners[UnityEngine.Random.Range(0, _catSpawners.Length)].position;
+        obj.GetComponent<Cat>().Init();
     }
 }
