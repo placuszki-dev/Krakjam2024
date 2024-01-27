@@ -38,8 +38,7 @@ namespace Placuszki.Krakjam2024
 
         private Player CreatePlayer(string playerId)
         {
-            Player player = Instantiate(_playerPrefab);
-            player.transform.SetParent(GetFirstAvailableParent());
+            Player player = Instantiate(_playerPrefab, GetFirstAvailableParent(), false);
             player.Id = playerId;
             return player;
         }
