@@ -23,6 +23,9 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private RigidbodySettings _rigidbodySettingsAfterCollision;
         [SerializeField] private float _destroyDelay = 3f;
 
+        [Header("Particle")]
+        public GameObject _collisionParticle;
+
         private Player _player;
 
         public void Launch(Player player, float xVector, float yVector)
@@ -64,7 +67,10 @@ namespace Placuszki.Krakjam2024
         private void SetRigidbodyValuesAfterCollision(Collision other)
         {
             if(other.gameObject.GetComponent<Cheese>()) // cheese with cheese -> nothing happens
-                return;         
+                return;
+
+            var part = Instantiate(_collisionParticle);
+            part.transform.position = transform.position;
 
             _rigidbody.angularDrag = _rigidbodySettingsAfterCollision.AngularDrag;
             _rigidbody.drag = _rigidbodySettingsAfterCollision.Drag;
