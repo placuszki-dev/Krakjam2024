@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using Unity.AI.Navigation;
@@ -52,10 +53,12 @@ public class Cat : MonoBehaviour
 
         _agent.speed = 0;
         _catBubble.gameObject.SetActive(true);
+        _catBubble.transform.DOScale(Vector3.one, 1f).SetEase(Ease.OutElastic);
         _animator.SetFloat("speed", 0);
         _animator.SetTrigger("stop");
         _catFaceImage.sprite = _catSprites[UnityEngine.Random.Range(0, _catSprites.Length)];
         _catAudio.clip = _catClip[UnityEngine.Random.Range(0, _catClip.Length)];
+        _catAudio.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
         _catAudio.Play();
         StartCoroutine(DeadDelay());
     }
@@ -63,6 +66,7 @@ public class Cat : MonoBehaviour
     [ContextMenu("Init")]
     public void Init()
     {
+        _catBubble.transform.DOScale(Vector3.zero, 0);
         _data = _surface.navMeshData;
         _agent.destination = SetRandomDest(_data.sourceBounds);
         _timer = 0;
