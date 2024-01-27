@@ -8,6 +8,7 @@ namespace Placuszki.Krakjam2024
     {
         [Header("References")] 
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Collider _collider;
 
         [Header("Settings - trajectory")]
         [SerializeField] private float _inputVectorYClampMin = 0.1f;
@@ -49,8 +50,19 @@ namespace Placuszki.Krakjam2024
 
         private void OnCollisionEnter(Collision other)
         {
+            // var cheeseDamageReceiver = other.gameObject.GetComponent<CheeseDamageReceiver>();
+            // if (cheeseDamageReceiver)
+            // {
+            // }
+            
             SetRigidbodyValuesAfterCollision(other);
+            DisableColliders();
             Destroy(gameObject, _destroyDelay);
+        }
+
+        private void DisableColliders()
+        {
+            _collider.enabled = false;
         }
 
         private void SetRigidbodyValuesAfterCollision(Collision other)
