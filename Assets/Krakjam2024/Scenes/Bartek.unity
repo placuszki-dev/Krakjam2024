@@ -2706,9 +2706,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _catprefab: {fileID: 1802051576}
   _catSpawners:
-  - {fileID: 1607850987}
-  - {fileID: 77953086}
+  - {fileID: 1430446598}
   - {fileID: 1417191420}
+  - {fileID: 1690227956}
+  - {fileID: 1889412286}
+  - {fileID: 1607850987}
+  - {fileID: 411778801}
+  - {fileID: 858059288}
+  - {fileID: 77953086}
+  - {fileID: 1978032117}
+  - {fileID: 39234563}
+  - {fileID: 979987311}
   _catCount: 5
 --- !u!4 &1818061347
 Transform:
