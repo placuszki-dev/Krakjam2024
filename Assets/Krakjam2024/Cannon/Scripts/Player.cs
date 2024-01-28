@@ -6,7 +6,7 @@ namespace Placuszki.Krakjam2024
 {
     public class Player : MonoBehaviour
     {
-        public string Id;
+        public UserInfo UserInfo;
         
         [Header("References")]
         [SerializeField] private MeshRenderer _inner;
@@ -26,7 +26,7 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private int _shakeVibrato = 50;
 
         private float _cooldownLeft = 0;
-
+        
         private void Update()
         {
             if (_cooldownLeft > 0)
@@ -36,20 +36,18 @@ namespace Placuszki.Krakjam2024
             }
         }
 
+        private void Start()
+        {
+            GameManager.Instance.RegisterPlayer(UserInfo);
+        }
+
         private void OnDestroy()
         {
-            GameManager.Instance.DeregisterPlayer(Id);
+            GameManager.Instance.DeregisterPlayer(UserInfo);
         }
 
         public void HandleDataPacket(DataPacket dataPacket)
         {
-            Debug.Log(dataPacket.PlayerId);
-            Debug.Log(dataPacket.PhoneColor);
-            Debug.Log(dataPacket.X);
-            Debug.Log(dataPacket.Y);
-
-            SetColor(dataPacket.PhoneColor);
-            GameManager.Instance.RegisterPlayer(dataPacket);
             if (_cooldownLeft <= 0)
             {
                 Shoot(dataPacket.X, dataPacket.Y);
@@ -89,7 +87,14 @@ namespace Placuszki.Krakjam2024
 
         public string GetPlayerId()
         {
-            return Id;
+            return UserInfo.PlayerId;
+        }
+
+        public void SetupPlayer(UserInfo userInfo)
+        {
+            UserInfo = userInfo;
+            
+            SetColor(userInfo.PhoneColor);
         }
     }
 }
