@@ -32,6 +32,7 @@ namespace Placuszki.Krakjam2024
         public Material _cheddarMaterial;
 
         private Player _player;
+        private bool _alreadyPlayedCollisionParticle;
 
         public void Launch(Player player, float xVector, float yVector, CheeseType cheeseType)
         {
@@ -94,8 +95,12 @@ namespace Placuszki.Krakjam2024
             if(other.gameObject.GetComponent<Cheese>()) // cheese with cheese -> nothing happens
                 return;
 
-            var part = Instantiate(_collisionParticle);
-            part.transform.position = transform.position;
+            if (!_alreadyPlayedCollisionParticle)
+            {
+                var part = Instantiate(_collisionParticle);
+                part.transform.position = transform.position;
+                _alreadyPlayedCollisionParticle = true;
+            }
 
             _rigidbody.angularDrag = _rigidbodySettingsAfterCollision.AngularDrag;
             _rigidbody.drag = _rigidbodySettingsAfterCollision.Drag;
