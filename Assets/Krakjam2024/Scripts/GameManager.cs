@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     private GamePhase _gamePhase;
     private void Start()
     {
-        PlayMusic();
+        _connectionManager.Connected += ShowMenu;
     }
 
     private void Update()
