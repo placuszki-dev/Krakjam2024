@@ -34,8 +34,11 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private float _shakeStrength = 0.1f;
         [SerializeField] private float _shakeDuration = 0.2f;
         [SerializeField] private int _shakeVibrato = 50;
+        [SerializeField] private float _lookAtTowardsMultiplier = 5f;
+
 
         private float _cooldownLeft = 0;
+        private Sequence _shootAnimation;
 
         private void Update()
         {
@@ -79,7 +82,14 @@ namespace Placuszki.Krakjam2024
 
         private void PlayShootAnimation(float x, float y)
         {
-            _view.DOShakePosition(_shakeDuration, new Vector3(x, 0, y) * _shakeStrength, _shakeVibrato);
+            _shootAnimation.Kill();
+            _shootAnimation = DOTween.Sequence();
+            var lookAtTowards = new Vector3(x, 0, y) * _lookAtTowardsMultiplier;
+            _shootAnimation = DOTween.Sequence();
+            _shootAnimation.Append(_view.DOShakePosition(_shakeDuration, new Vector3(x, 0, y) * _shakeStrength, _shakeVibrato));
+            _shootAnimation.Join(_view.DOLookAt(lookAtTowards, _shakeDuration/2f, AxisConstraint.Y));
+            _shootAnimation.Append(_view.DOLocalRotate(Vector3.zero, _shakeDuration/2f));
+            _shootAnimation.Play();
         }
 
         private void UpdateCooldownGfx()
