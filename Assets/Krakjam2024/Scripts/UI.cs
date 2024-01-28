@@ -7,6 +7,7 @@ public class UI : MonoBehaviour
 {
     public Animation _uiAnim;
     public TMP_Text MainText;
+    public TMP_Text LinkText;
     public TMP_Text WinText;
     public CanvasGroup CanvasGroup;
     public GameObject PanelWin;
@@ -56,7 +57,8 @@ public class UI : MonoBehaviour
         PanelMain.SetActive(true);
         _uiAnim.Play("serReverse");
         CanvasGroup.alpha = 1;
-        MainText.DOFade(0, 3).From();
+        MainText.DOFade(0, 2).From();
+        LinkText.DOFade(0, 2).From();
     }
 
 }
