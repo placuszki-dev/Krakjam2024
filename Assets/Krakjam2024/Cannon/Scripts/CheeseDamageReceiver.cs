@@ -23,7 +23,8 @@ public class CheeseDamageReceiver : MonoBehaviour
             enabled = false;
             
             var playerId = cheese.GetPlayerId();
-            _cat.Hit(playerId, cheese.CheeseType);
+            Color playerColor = cheese.GetPlayerColor();
+            _cat.Hit(playerId, cheese.CheeseType, playerColor);
 
             if (_sfx.isActiveAndEnabled)
             {
