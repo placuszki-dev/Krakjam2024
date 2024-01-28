@@ -1,6 +1,8 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Placuszki.Krakjam2024.Server;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Placuszki.Krakjam2024
 {
@@ -14,9 +16,14 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private Transform _innerScaleTransform;
         [SerializeField] private Transform _launcherTransform;
         [SerializeField] private Transform _view;
+        [SerializeField] private Image _cheeseIconImage;
 
         [Header("Prefabs")]
         [SerializeField] private Cheese _cheesePrefab;
+        
+        [Header("Prefabs")]
+        [SerializeField] private Sprite _goudaSprite;
+        [SerializeField] private Sprite _cheddarSprite;
         
         [Header("Settings")]
         [SerializeField] private float _cooldown = 0.5f;
@@ -96,6 +103,23 @@ namespace Placuszki.Krakjam2024
         {
             UserInfo = userInfo;
             SetColor(userInfo.PhoneColor);
+            SetupCheeseIcon(userInfo.CheeseType);
+        }
+
+        private void SetupCheeseIcon(int cheeseTypeInt)
+        {
+            Debug.Log($"cheeseTypeInt: {cheeseTypeInt}");
+            CheeseType cheeseType = (CheeseType)cheeseTypeInt;
+            switch (cheeseType)
+            {
+                case CheeseType.Unknown:
+                case CheeseType.Gouda:
+                    _cheeseIconImage.sprite = _goudaSprite;
+                    break;
+                case CheeseType.Cheddar:
+                    _cheeseIconImage.sprite = _cheddarSprite;
+                    break;
+            }
         }
     }
 }
