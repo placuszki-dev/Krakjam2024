@@ -10881,7 +10881,7 @@ MonoBehaviour:
   - {fileID: 39234563}
   - {fileID: 979987311}
   _catCount: 5
-  _pointsToWin: 7
+  _pointsToWin: 10
   _connectionManager: {fileID: 159041411}
   _gameMusic: {fileID: 1818061348}
   _menuMusic: {fileID: 1818061349}
@@ -13128,6 +13128,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2795939508990864436, guid: cef68888e42d8d843b061c8cd35dba1c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.200012
+      objectReference: {fileID: 0}
+    - target: {fileID: 3666459265579661358, guid: cef68888e42d8d843b061c8cd35dba1c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -5.200012
+      objectReference: {fileID: 0}
     - target: {fileID: 5996078966154666832, guid: cef68888e42d8d843b061c8cd35dba1c, type: 3}
       propertyPath: m_Name
       value: UI
