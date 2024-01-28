@@ -10886,8 +10886,8 @@ MonoBehaviour:
   _gameMusic: {fileID: 1818061348}
   _menuMusic: {fileID: 1818061349}
   _applauseSFX: {fileID: 1818061350}
-  _goudaScorePanel: {fileID: 607094394}
-  _cheddarScorePanel: {fileID: 111178368}
+  _goudaScorePanel: {fileID: 111178368}
+  _cheddarScorePanel: {fileID: 607094394}
 --- !u!4 &1818061347
 Transform:
   m_ObjectHideFlags: 0
