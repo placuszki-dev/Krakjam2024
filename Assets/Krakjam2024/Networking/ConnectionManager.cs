@@ -77,6 +77,11 @@ namespace Placuszki.Krakjam2024
             Debug.Log("SendMainMenuOpenedToServer");
             _connectionManager?.Connection.SendAsync(nameof(IClientHub.SendMainMenuOpenedToServer));
         }
+
+        public void VibratePhone(string playerId, float force)
+        {
+            _connectionManager?.Connection.SendAsync(nameof(IClientHub.VibratePhone), playerId, force);
+        }
         #endregion
         
         private void StartConnectionCoroutine()

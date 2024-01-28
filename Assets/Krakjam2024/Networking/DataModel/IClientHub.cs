@@ -6,5 +6,6 @@ namespace CargoAR.Shared.Network
     {
         void SendEndGameToServer(int winningCheeseType);
         void SendMainMenuOpenedToServer();
+        void VibratePhone(string playerId, float force);
     }
 }
