@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 9006187981667528558}
   _meshRenderer: {fileID: 1181378731480728822}
-  _inputVectorYClampMin: 0.1
+  _inputVectorYClampMin: 0.4
   _inputVectorsClampMax: 1
   _xMultiplier: 100
   _yMultiplier: 110.8
