@@ -1,7 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using Placuszki.Krakjam2024.Server;
 using TMPro;
 
@@ -17,7 +15,6 @@ public class UI : MonoBehaviour
 
     void Start()
     {
-        NewGame();
         GameManager.Instance.OnMenu += ShowMenu;
         GameManager.Instance.OnEndGame += EndGame;
         GameManager.Instance.OnStartGame += StartGame;

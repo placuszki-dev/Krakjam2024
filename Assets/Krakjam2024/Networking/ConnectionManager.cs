@@ -68,11 +68,13 @@ namespace Placuszki.Krakjam2024
         #region ClientHub
         public void SendEndGameToServer(UserInfo winningUserInfo)
         {
+            Debug.Log("SendEndGameToServer");
             _connectionManager?.Connection.SendAsync(nameof(IClientHub.SendEndGameToServer), winningUserInfo);
         } 
         
         public void SendMainMenuOpenedToServer()
         {
+            Debug.Log("SendMainMenuOpenedToServer");
             _connectionManager?.Connection.SendAsync(nameof(IClientHub.SendMainMenuOpenedToServer));
         }
         #endregion
