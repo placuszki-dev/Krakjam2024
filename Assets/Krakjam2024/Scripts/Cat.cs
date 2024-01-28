@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using System.Collections;
+using Placuszki.Krakjam2024;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -22,6 +23,9 @@ public class Cat : MonoBehaviour
     public AudioSource _catAudio;
     public AudioClip[] _catClip;
 
+    public GameObject _goudaOnFace;
+    public GameObject _cheddarOnFace;
+    
     [Space]
     public Animator _animator;
     public float _deadDelay = 2f;
@@ -35,20 +39,32 @@ public class Cat : MonoBehaviour
 
     Vector3 destination;
 
-
     [ContextMenu("hit")]
     void TestHit()
     {
-        Hit("1");
+        Hit("1", CheeseType.Gouda);
     }
 
-    public void Hit(string playerID)
+    public void Hit(string playerID, CheeseType cheeseType)
     {
         if (_alreadyHit)
             return;
         
         _alreadyHit = true;
 
+        switch (cheeseType)
+        {
+            case CheeseType.Unknown:
+                break;
+            case CheeseType.Gouda:
+                _goudaOnFace.SetActive(true);
+                break;
+            case CheeseType.Cheddar:
+                _cheddarOnFace.SetActive(true);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(cheeseType), cheeseType, null);
+        }
         GameManager.Instance.CatHit(playerID);
 
         _agent.speed = 0;
