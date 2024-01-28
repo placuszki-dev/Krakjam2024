@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 2598607124522486909}
   - component: {fileID: 3043783918413935237}
   - component: {fileID: 8823802350254968811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Outer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3133600840995574240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4255579847497197881}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: InnerScaleTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 958663720671185336}
   - component: {fileID: 6085607746652384172}
   - component: {fileID: 5685351212282234979}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbe243a9552444f5983762255e6dcd15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Id: 
   _inner: {fileID: 5685351212282234979}
   _innerScaleTransform: {fileID: 4255579847497197881}
   _launcherTransform: {fileID: 8872293041261193127}
