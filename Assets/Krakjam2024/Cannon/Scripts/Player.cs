@@ -6,6 +6,7 @@ namespace Placuszki.Krakjam2024
 {
     public class Player : MonoBehaviour
     {
+        public int Points { get; set; }
         public UserInfo UserInfo;
         
         [Header("References")]
@@ -26,7 +27,7 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private int _shakeVibrato = 50;
 
         private float _cooldownLeft = 0;
-        
+
         private void Update()
         {
             if (_cooldownLeft > 0)
@@ -38,12 +39,12 @@ namespace Placuszki.Krakjam2024
 
         private void Start()
         {
-            GameManager.Instance.RegisterPlayer(UserInfo);
+            GameManager.Instance.RegisterPlayer(this);
         }
 
         private void OnDestroy()
         {
-            GameManager.Instance.DeregisterPlayer(UserInfo);
+            GameManager.Instance.DeregisterPlayer(this);
         }
 
         public void HandleDataPacket(DataPacket dataPacket)

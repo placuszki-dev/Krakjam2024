@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public event Action OnMenu;
     public event Action OnStartGame;
-    public event Action<string> OnEndGame;
+    public event Action<UserInfo> OnEndGame;
 
     public GameObject _ui;
     public GameObject _catprefab;
@@ -45,8 +45,7 @@ public class GameManager : MonoBehaviour
     public AudioSource _menuMusic;
 
     private List<Cat> _activeCats = new List<Cat>();
-    private Dictionary<string, int> _players = new Dictionary<string, int>();
-    private Dictionary<string, string> _colors = new Dictionary<string, string>();
+    private readonly List<Player> _players = new ();
 
     private GamePhase _gamePhase;
     private void Start()
@@ -121,15 +120,14 @@ public class GameManager : MonoBehaviour
         SendMainMenuOpenedEndGameToServer();
     }
 
-    private void EndGame(int winningPlayerIndex)
+    private void EndGame(Player winner)
     {
         SetPhase(GamePhase.EndGame);
-        OnEndGame?.Invoke(_players.ElementAt(winningPlayerIndex).Key);
+        OnEndGame?.Invoke(winner.UserInfo);
 
         _ui.SetActive(true);
         DestroyAllCats();
-        _players.Clear();
-        _colors.Clear();
+        DestroyAllPlayers();
 
         PlayMusic();
         
@@ -190,16 +188,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RegisterPlayer(UserInfo userInfo)
+    public void RegisterPlayer(Player player)
     {
-        _players.TryAdd(userInfo.PlayerId, 0);
-        _colors.TryAdd(userInfo.PlayerId, userInfo.PhoneColor);
+        if(!_players.Contains(player))
+            _players.Add(player);
     }
 
-    public void DeregisterPlayer(UserInfo userInfo)
+    public void DeregisterPlayer(Player player)
     {
-        _players.Remove(userInfo.PlayerId);
-        _colors.Remove(userInfo.PlayerId);
+        _players.Remove(player);
     }
 
     private void CreateCats()
@@ -226,6 +223,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(player.gameObject);
         }
+        _players.Clear();
     }
     
     private void CreateCat()
@@ -249,8 +247,8 @@ public class GameManager : MonoBehaviour
 
     public void CatHit(string playerID)
     {
-        int playerPoints = _players[playerID];
-        _players[playerID] = playerPoints + 1;
+        Player player = _players.FirstOrDefault(p => p.UserInfo.PlayerId.Equals(playerID));
+        player.Points++;
 
         if (!CheckIfSomeoneWin())
         {
@@ -260,11 +258,11 @@ public class GameManager : MonoBehaviour
 
     private bool CheckIfSomeoneWin()
     {
-        for (int i = 0; i < _players.Count; i++)
+        foreach (var player in _players)
         {
-            if (_players.ElementAt(i).Value >= _pointsToWin)
+            if (player.Points >= _pointsToWin)
             {
-                EndGame(i);
+                EndGame(player);
                 return true;
             }
         }

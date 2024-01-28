@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using DG.Tweening.Core;
 using DG.Tweening.Plugins.Options;
+using Placuszki.Krakjam2024.Server;
 using TMPro;
 
 public class UI : MonoBehaviour
@@ -34,10 +35,10 @@ public class UI : MonoBehaviour
         NewGame();
     } 
     
-    private void EndGame(string obj)
+    private void EndGame(UserInfo winner)
     {
         gameObject.SetActive(true);
-        WinText.text = "Player " + obj + "Wins!";
+        WinText.text = "Player " + winner.PlayerId + " Wins!";
 
         _fadeTween = CanvasGroup.DOFade(1, 2);
         PanelWin.SetActive(true);
