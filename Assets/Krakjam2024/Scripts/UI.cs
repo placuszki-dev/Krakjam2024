@@ -48,7 +48,7 @@ public class UI : MonoBehaviour
     private void StartGame()
     {
         _uiAnim.Play("ser");
-        _fadeTween = CanvasGroup.DOFade(0, 3);
+        _fadeTween = CanvasGroup.DOFade(0, 2);
         PanelPlay.SetActive(true);
     }
 
@@ -61,8 +61,8 @@ public class UI : MonoBehaviour
         PanelPlay.SetActive(false);
         _uiAnim.Play("serReverse");
         CanvasGroup.alpha = 1;
-        MainText.DOFade(0, 2).From();
-        LinkText.DOFade(0, 2).From();
+        MainText.DOFade(0, 1).From();
+        LinkText.DOFade(0, 1).From();
     }
 
 }
