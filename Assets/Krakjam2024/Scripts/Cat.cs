@@ -23,13 +23,13 @@ public class Cat : MonoBehaviour
     public AudioSource _catAudio;
     public AudioClip[] _catClip;
 
+    public bool _showCheeseOnFace = true;
     public GameObject _goudaOnFace;
     public GameObject _cheddarOnFace;
     
     [Space]
     public Animator _animator;
     public float _deadDelay = 2f;
-
 
     private float _timer;
     private NavMeshData _data;
@@ -52,19 +52,23 @@ public class Cat : MonoBehaviour
         
         _alreadyHit = true;
 
-        switch (cheeseType)
+        if (_showCheeseOnFace)
         {
-            case CheeseType.Unknown:
-                break;
-            case CheeseType.Gouda:
-                _goudaOnFace.SetActive(true);
-                break;
-            case CheeseType.Cheddar:
-                _cheddarOnFace.SetActive(true);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(cheeseType), cheeseType, null);
+            switch (cheeseType)
+            {
+                case CheeseType.Unknown:
+                    break;
+                case CheeseType.Gouda:
+                    _goudaOnFace.SetActive(true);
+                    break;
+                case CheeseType.Cheddar:
+                    _cheddarOnFace.SetActive(true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cheeseType), cheeseType, null);
+            }
         }
+
         GameManager.Instance.CatHit(playerID);
 
         _agent.speed = 0;

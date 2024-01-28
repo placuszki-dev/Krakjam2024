@@ -13,6 +13,7 @@ public class CheeseDamageReceiver : MonoBehaviour
         if (cheese && cheese.IsDeadly)
         {
             cheese.transform.SetParent(transform);
+            cheese.gameObject.SetActive(false);
 
             if (!enabled)
             {
