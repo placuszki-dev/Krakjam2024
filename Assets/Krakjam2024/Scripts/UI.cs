@@ -11,6 +11,7 @@ public class UI : MonoBehaviour
     public TMP_Text WinText;
     public CanvasGroup CanvasGroup;
     public GameObject PanelWin;
+    public GameObject PanelPlay;
     public GameObject PanelMain;
     private Tween _fadeTween;
 
@@ -41,12 +42,14 @@ public class UI : MonoBehaviour
         _fadeTween = CanvasGroup.DOFade(1, 2);
         PanelWin.SetActive(true);
         PanelMain.SetActive(false);
+        PanelPlay.SetActive(false);
     }
 
     private void StartGame()
     {
         _uiAnim.Play("ser");
         _fadeTween = CanvasGroup.DOFade(0, 3);
+        PanelPlay.SetActive(true);
     }
 
     void NewGame()
@@ -55,6 +58,7 @@ public class UI : MonoBehaviour
         gameObject.SetActive(true);
         PanelWin.SetActive(false);
         PanelMain.SetActive(true);
+        PanelPlay.SetActive(false);
         _uiAnim.Play("serReverse");
         CanvasGroup.alpha = 1;
         MainText.DOFade(0, 2).From();

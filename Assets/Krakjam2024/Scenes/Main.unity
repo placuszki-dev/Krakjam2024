@@ -840,6 +840,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4835789832631930, guid: bdf8e7438a7816543998181bd3067573, type: 3}
   m_PrefabInstance: {fileID: 780296886}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &111178368 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1222965265254301182, guid: cef68888e42d8d843b061c8cd35dba1c, type: 3}
+  m_PrefabInstance: {fileID: 3042441201673502749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cf0fc1f1884bbfb48008c9d414302f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &114162152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3757,6 +3768,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bdf8e7438a7816543998181bd3067573, type: 3}
+--- !u!114 &607094394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 347926161540409828, guid: cef68888e42d8d843b061c8cd35dba1c, type: 3}
+  m_PrefabInstance: {fileID: 3042441201673502749}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1cf0fc1f1884bbfb48008c9d414302f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &612254844 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4252784401376168, guid: 22a3fd8d3e59a1149bdcd775c0e87241, type: 3}
@@ -11528,6 +11550,8 @@ MonoBehaviour:
   _connectionManager: {fileID: 159041411}
   _gameMusic: {fileID: 1818061348}
   _menuMusic: {fileID: 1818061349}
+  _goudaScorePanel: {fileID: 607094394}
+  _cheddarScorePanel: {fileID: 111178368}
 --- !u!4 &1818061347
 Transform:
   m_ObjectHideFlags: 0
@@ -13621,7 +13645,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2103362292}
   - component: {fileID: 2103362291}
-  - component: {fileID: 2103362290}
   m_Layer: 0
   m_Name: Phones camera
   m_TagString: MainCamera
@@ -13629,14 +13652,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2103362290
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103362289}
-  m_Enabled: 1
 --- !u!20 &2103362291
 Camera:
   m_ObjectHideFlags: 0
