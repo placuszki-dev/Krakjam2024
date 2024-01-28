@@ -17,7 +17,6 @@ public class CheeseScorePanel : MonoBehaviour
     {
         if (score == _score)
         {
-            Debug.Log("CHUJ");
             return;
         }
 
