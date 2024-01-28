@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     [Space]
     public AudioSource _gameMusic;
     public AudioSource _menuMusic;
+    public AudioSource _applauseSFX;
 
     [Space]
     [SerializeField] private CheeseScorePanel _goudaScorePanel;
@@ -167,6 +168,7 @@ public class GameManager : MonoBehaviour
             case GamePhase.EndGame:
                 _gameMusic?.Stop();
                 _menuMusic?.Play();
+                _applauseSFX?.Play();
                 break;
                 
             default:
