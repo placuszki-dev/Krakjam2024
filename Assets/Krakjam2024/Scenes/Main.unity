@@ -8618,7 +8618,7 @@ MonoBehaviour:
   - {fileID: 39234563}
   - {fileID: 979987311}
   _catCount: 5
-  _pointsToWin: 20
+  _pointsToWin: 1
   _connectionManager: {fileID: 159041411}
   _gameMusic: {fileID: 1818061348}
   _menuMusic: {fileID: 1818061349}
