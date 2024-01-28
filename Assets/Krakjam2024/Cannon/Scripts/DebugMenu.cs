@@ -43,7 +43,7 @@ public class DebugMenu : MonoBehaviour
     {
         var userInfo = new UserInfo()
         {
-            PlayerId = "DebugUser",
+            PlayerId = "DebugUser0",
             PhoneColor = "#ff0000",
             CheeseType = 1,
         };
@@ -131,7 +131,7 @@ public class DebugMenu : MonoBehaviour
     {
         DataPacket dp = new DataPacket()
         {
-            PlayerId = "DebugUser1",
+            PlayerId = "DebugUser0",
             X = Random.Range(-0.5f, 0.5f),
             Y = Random.Range(0.5f, 1),
         };
