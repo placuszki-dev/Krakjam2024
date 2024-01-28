@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
     private void ShowMenu()
     {
         SetPhase(GamePhase.Menu);
-        
+        DestroyAllPlayers();
         _goudaScorePanel.SetScore(0, _pointsToWin);
         _cheddarScorePanel.SetScore(0, _pointsToWin);
         
@@ -139,7 +139,6 @@ public class GameManager : MonoBehaviour
 
         _ui.SetActive(true);
         DestroyAllCats();
-        DestroyAllPlayers();
 
         PlayMusic();
         
@@ -237,6 +236,7 @@ public class GameManager : MonoBehaviour
     {
         Player player = _players.FirstOrDefault(p => p.UserInfo.PlayerId.Equals(playerID));
         player.Points++;
+        player.SetPlayerScoreText(player.Points); // xd refactor this shit
 
         _connectionManager.VibratePhone(playerID, player.Points);
         

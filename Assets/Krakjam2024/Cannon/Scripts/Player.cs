@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using Placuszki.Krakjam2024.Server;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,7 @@ namespace Placuszki.Krakjam2024
         [SerializeField] private Transform _launcherTransform;
         [SerializeField] private Transform _view;
         [SerializeField] private Image _cheeseIconImage;
+        [SerializeField] private TextMeshProUGUI _playerScoreText;
 
         [Header("Prefabs")]
         [SerializeField] private Cheese _cheesePrefab;
@@ -109,6 +111,11 @@ namespace Placuszki.Krakjam2024
             UserInfo = userInfo;
             SetColor(userInfo.PhoneColor);
             SetupCheeseIcon(userInfo.CheeseType);
+        }
+
+        public void SetPlayerScoreText(int score)
+        {
+            _playerScoreText.SetText(score.ToString());
         }
 
         private void SetupCheeseIcon(int cheeseTypeInt)
