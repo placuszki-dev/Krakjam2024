@@ -677,6 +677,7 @@ MonoBehaviour:
   _shakeStrength: 0.8
   _shakeDuration: 0.2
   _shakeVibrato: 20
+  _lookAtTowardsMultiplier: 50
 --- !u!1001 &6970555451689054293
 PrefabInstance:
   m_ObjectHideFlags: 0
