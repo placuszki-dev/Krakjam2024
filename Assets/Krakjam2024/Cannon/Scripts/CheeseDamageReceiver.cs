@@ -22,7 +22,7 @@ public class CheeseDamageReceiver : MonoBehaviour
             enabled = false;
             
             var playerId = cheese.GetPlayerId();
-            _cat.Hit(playerId);
+            _cat.Hit(playerId, cheese.CheeseType);
 
             if (_sfx.isActiveAndEnabled)
             {

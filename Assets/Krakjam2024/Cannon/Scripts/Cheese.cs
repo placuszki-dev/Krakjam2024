@@ -34,8 +34,12 @@ namespace Placuszki.Krakjam2024
         private Player _player;
         private bool _alreadyPlayedCollisionParticle;
 
+        public CheeseType CheeseType => _cheeseType;
+        private CheeseType _cheeseType;
+
         public void Launch(Player player, float xVector, float yVector, CheeseType cheeseType)
         {
+            _cheeseType = cheeseType;
             switch (cheeseType)
             {
                 case CheeseType.Unknown:
