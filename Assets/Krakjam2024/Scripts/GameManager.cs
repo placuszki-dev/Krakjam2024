@@ -241,6 +241,9 @@ public class GameManager : MonoBehaviour
             CheeseType cheeseType = (CheeseType) player.UserInfo.CheeseType;
             switch (cheeseType)
             {
+                case CheeseType.Unknown:
+                    goudaPoints += points;
+                    break;
                 case CheeseType.Gouda:
                     goudaPoints += points;
                     break;
