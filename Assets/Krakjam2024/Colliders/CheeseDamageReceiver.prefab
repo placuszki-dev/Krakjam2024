@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2207558693830095928}
   - component: {fileID: 5454469550660339505}
   m_Layer: 0
-  m_Name: CheeseDamageReceiver - audio source
+  m_Name: AudioSource
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,6 +128,75 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2064076728728756035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6819402288307419226}
+  - component: {fileID: 3101663720187866525}
+  - component: {fileID: 1201564044293597420}
+  m_Layer: 0
+  m_Name: CheeseDamageReceiver - custom collider - body
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6819402288307419226
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064076728728756035}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.70710707, y: -0, z: -0, w: 0.70710653}
+  m_LocalPosition: {x: 0, y: 0.319, z: 0.023}
+  m_LocalScale: {x: 21.648, y: 21.648, z: 21.648}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1483554423195455601}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &3101663720187866525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064076728728756035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 518c616f0b38c9246830141fdfde7696, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cat: {fileID: 0}
+  _sfx: {fileID: 5454469550660339505}
+--- !u!64 &1201564044293597420
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064076728728756035}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7862664559671902268, guid: 3c61327aa780f3e46b67560fc5b36da3, type: 3}
 --- !u!1 &3298960187115831902
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +229,9 @@ Transform:
   - {fileID: 6256538121233279442}
   - {fileID: 1064761826721463324}
   - {fileID: 5131637943784778833}
+  - {fileID: 6819402288307419226}
   - {fileID: 6412527116310933397}
+  - {fileID: 620659189315624200}
   - {fileID: 2207558693830095928}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -272,7 +343,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1064761826721463324
 Transform:
   m_ObjectHideFlags: 0
@@ -344,6 +415,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.28189063, y: 0.51, z: 0.49321893}
   m_Center: {x: -0.0038985643, y: -0.07, z: 0.031186448}
+--- !u!1 &4927262669124587558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620659189315624200}
+  m_Layer: 0
+  m_Name: CheeseLookAtAfterHitTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &620659189315624200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4927262669124587558}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.33, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1483554423195455601}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5989964099811418404
 GameObject:
   m_ObjectHideFlags: 0
@@ -446,15 +548,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5131637943784778833}
   - component: {fileID: 6965455994321189448}
-  - component: {fileID: 1185222807103460972}
-  - component: {fileID: 6964580108729240563}
+  - component: {fileID: 4518716078590958679}
   m_Layer: 0
-  m_Name: CheeseDamageReceiver - custom colliders
+  m_Name: CheeseDamageReceiver - custom collider - head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5131637943784778833
 Transform:
   m_ObjectHideFlags: 0
@@ -465,7 +566,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.584, z: 0.386}
-  m_LocalScale: {x: 6.701, y: 6.701, z: 6.701}
+  m_LocalScale: {x: 18.33582, y: 18.33582, z: 18.33582}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1483554423195455601}
@@ -484,53 +585,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cat: {fileID: 0}
   _sfx: {fileID: 5454469550660339505}
---- !u!33 &1185222807103460972
-MeshFilter:
+--- !u!64 &4518716078590958679
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7779955189678119278}
-  m_Mesh: {fileID: 5973409152776919321, guid: 276524ef937e19540a07e353032fd9d3, type: 3}
---- !u!23 &6964580108729240563
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7779955189678119278}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 43b440e0e5c0b5c4e923bfbc08aaf455, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5973409152776919321, guid: 276524ef937e19540a07e353032fd9d3, type: 3}
