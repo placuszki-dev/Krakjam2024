@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Placuszki.Krakjam2024;
-using Placuszki.Krakjam2024.Server;
 
 public enum GamePhase
 {
@@ -44,10 +43,17 @@ public class GameManager : MonoBehaviour
     public AudioSource _gameMusic;
     public AudioSource _menuMusic;
 
+    [Space]
+    [SerializeField] private CheeseScorePanel _goudaScorePanel;
+    [SerializeField] private CheeseScorePanel _cheddarScorePanel;
+    
     private List<Cat> _activeCats = new List<Cat>();
     private readonly List<Player> _players = new ();
-
+    
+    
+    
     private GamePhase _gamePhase;
+
     private void Start()
     {
         _connectionManager.Connected += ShowMenu;
@@ -86,10 +92,15 @@ public class GameManager : MonoBehaviour
     private void ShowMenu()
     {
         SetPhase(GamePhase.Menu);
+        
+        _goudaScorePanel.SetScore(0, _pointsToWin);
+        _cheddarScorePanel.SetScore(0, _pointsToWin);
+        
         //_ui.SetActive(true);
         PlayMusic();
         SendMainMenuOpenedEndGameToServer();
         OnMenu?.Invoke();
+        
     }
 
     private void SetPhase(GamePhase phase)
@@ -225,13 +236,13 @@ public class GameManager : MonoBehaviour
         Player player = _players.FirstOrDefault(p => p.UserInfo.PlayerId.Equals(playerID));
         player.Points++;
 
-        if (!CheckIfSomeTeamWon())
+        if (!UpdateScore())
         {
             CreateCat();
         }
     }
 
-    private bool CheckIfSomeTeamWon()
+    private bool UpdateScore()
     {
         int cheddarPoints = 0;
         int goudaPoints = 0;
@@ -255,6 +266,9 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        _goudaScorePanel.SetScore(goudaPoints, _pointsToWin);
+        _cheddarScorePanel.SetScore(cheddarPoints, _pointsToWin);
+        
         if (cheddarPoints >= _pointsToWin)
         {
             EndGame(CheeseType.Cheddar);
