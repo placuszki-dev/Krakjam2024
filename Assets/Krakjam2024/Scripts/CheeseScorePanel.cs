@@ -1,4 +1,3 @@
-using System;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -14,17 +13,15 @@ public class CheeseScorePanel : MonoBehaviour
 
     private int _score = -1;
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.A))
-            Shake();
-    }
-
     public void SetScore(int score, int maxScore)
     {
         if (score == _score)
+        {
+            Debug.Log("CHUJ");
             return;
+        }
 
+        _score = score;
         _scoreText.SetText($"{score}/{maxScore}");
         if (score < maxScore)
             Shake();
