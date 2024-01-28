@@ -238,6 +238,8 @@ public class GameManager : MonoBehaviour
         Player player = _players.FirstOrDefault(p => p.UserInfo.PlayerId.Equals(playerID));
         player.Points++;
 
+        _connectionManager.VibratePhone(playerID, player.Points);
+        
         if (!UpdateScore())
         {
             CreateCat();
