@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using System.Threading.Tasks;
 using Placuszki.Krakjam2024;
 using Placuszki.Krakjam2024.Server;
-using UnityEditor;
 
 public enum GamePhase
 {
@@ -66,7 +64,7 @@ public class GameManager : MonoBehaviour
                     StartGame();
                     break;
                 case GamePhase.Play:
-                    StopGame();
+                    // do nothing
                     break;
                 case GamePhase.EndGame:
                     ShowMenu();
@@ -75,20 +73,36 @@ public class GameManager : MonoBehaviour
                     throw new ArgumentOutOfRangeException();
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            if (_gamePhase == GamePhase.Play)
+            {
+                StopGame();
+                ShowMenu();
+            }
+        }
     }
 
     private void ShowMenu()
     {
-        _gamePhase = GamePhase.Menu;
+        SetPhase(GamePhase.Menu);
         //_ui.SetActive(true);
         PlayMusic();
+        SendMainMenuOpenedEndGameToServer();
         OnMenu?.Invoke();
     }
-    
+
+    private void SetPhase(GamePhase phase)
+    {
+        Debug.Log($"SetPhase: {phase.ToString()}");
+        _gamePhase = phase;
+    }
+
     [ContextMenu("StartGame")]
     public void StartGame()
     {
-        _gamePhase = GamePhase.Play;
+        SetPhase(GamePhase.Play);
         //_ui.SetActive(false);
         PlayMusic();
         CreateCats();
@@ -98,16 +112,18 @@ public class GameManager : MonoBehaviour
     [ContextMenu("StopGame")]
     private void StopGame()
     {
-        _gamePhase = GamePhase.Menu;
+        SetPhase(GamePhase.Menu);
 
         // _ui.SetActive(true);
         PlayMusic();
         DestroyAllCats();
+        DestroyAllPlayers();
+        SendMainMenuOpenedEndGameToServer();
     }
-    
+
     private void EndGame(int winningPlayerIndex)
     {
-        _gamePhase = GamePhase.EndGame;
+        SetPhase(GamePhase.EndGame);
         OnEndGame?.Invoke(_players.ElementAt(winningPlayerIndex).Key);
 
         _ui.SetActive(true);
@@ -131,7 +147,7 @@ public class GameManager : MonoBehaviour
     {
         _connectionManager.SendEndGameToServer(userInfo);
     }
-     
+
     [ContextMenu("DebugSendEndGameToServer")]
     private void DebugSendEndGameToServer()
     {
@@ -144,6 +160,17 @@ public class GameManager : MonoBehaviour
         _connectionManager.SendEndGameToServer(userInfo);
     }
     
+    [ContextMenu("DebugSendMainMenuOpenedEndGameToServer")]
+    private void DebugSendMainMenuOpenedEndGameToServer()
+    {
+        _connectionManager.SendMainMenuOpenedToServer();
+    }
+    
+    private void SendMainMenuOpenedEndGameToServer()
+    {
+        _connectionManager.SendMainMenuOpenedToServer();
+    }
+
     private void PlayMusic()
     {
         switch (_gamePhase)
@@ -185,15 +212,22 @@ public class GameManager : MonoBehaviour
     
     private void DestroyAllCats()
     {
-        for (int i = 0; i < _activeCats.Count; i++)
+        foreach (var cat in _activeCats)
         {
-            var cat = _activeCats[i];
             cat.DestroyCat();
         }
 
         _activeCats.Clear();
     }
 
+    private void DestroyAllPlayers()
+    {
+        foreach (var player in FindObjectsOfType<Player>().ToList())
+        {
+            Destroy(player.gameObject);
+        }
+    }
+    
     private void CreateCat()
     {
         _catprefab.SetActive(true); // Stupid hack
@@ -223,8 +257,6 @@ public class GameManager : MonoBehaviour
             CreateCat();
         }
     }
-
-   
 
     private bool CheckIfSomeoneWin()
     {

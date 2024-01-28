@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using TMPro;
 
 public class UI : MonoBehaviour
@@ -10,7 +12,7 @@ public class UI : MonoBehaviour
     public CanvasGroup CanvasGroup;
     public GameObject PanelWin;
     public GameObject PanelMain;
-
+    private Tween _fadeTween;
 
     void Start()
     {
@@ -37,7 +39,7 @@ public class UI : MonoBehaviour
         gameObject.SetActive(true);
         WinText.text = "Player " + obj + "Wins!";
 
-        CanvasGroup.DOFade(1, 2);
+        _fadeTween = CanvasGroup.DOFade(1, 2);
         PanelWin.SetActive(true);
         PanelMain.SetActive(false);
     }
@@ -45,15 +47,17 @@ public class UI : MonoBehaviour
     private void StartGame()
     {
         _uiAnim.Play("ser");
-        CanvasGroup.DOFade(0, 3);
+        _fadeTween = CanvasGroup.DOFade(0, 3);
     }
 
     void NewGame()
     {
+        _fadeTween.Kill();
         gameObject.SetActive(true);
         PanelWin.SetActive(false);
         PanelMain.SetActive(true);
         _uiAnim.Play("serReverse");
+        CanvasGroup.alpha = 1;
         MainText.DOFade(0, 3).From();
     }
 
