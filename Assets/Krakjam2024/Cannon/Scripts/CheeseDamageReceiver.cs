@@ -12,12 +12,22 @@ public class CheeseDamageReceiver : MonoBehaviour
         var cheese = other.gameObject.GetComponent<Cheese>();
         if (cheese && cheese.IsDeadly)
         {
+            if (!enabled)
+            {
+                return;
+            }
+            
+            enabled = false;
+            
             var playerId = cheese.GetPlayerId();
             _cat.Hit(playerId);
             cheese.transform.SetParent(transform);
 
-            _sfx.pitch = Random.Range(0.7f, 1.2f);
-            _sfx.Play();
+            if (_sfx.isActiveAndEnabled)
+            {
+                _sfx.pitch = Random.Range(0.7f, 1.2f);
+                _sfx.Play();
+            }
         }
     }
 }

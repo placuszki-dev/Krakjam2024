@@ -59,7 +59,12 @@ public class Cat : MonoBehaviour
         _catFaceImage.sprite = _catSprites[UnityEngine.Random.Range(0, _catSprites.Length)];
         _catAudio.clip = _catClip[UnityEngine.Random.Range(0, _catClip.Length)];
         _catAudio.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
-        _catAudio.Play();
+
+        if (_catAudio.isActiveAndEnabled)
+        {
+            _catAudio.Play();
+        }
+
         StartCoroutine(DeadDelay());
     }
 
