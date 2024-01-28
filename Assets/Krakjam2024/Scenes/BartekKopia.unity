@@ -1169,6 +1169,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4586821900076392, guid: ae9772ea62bbc724eb9b8ef81109f733, type: 3}
   m_PrefabInstance: {fileID: 1383719882}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &159041411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1842928450163935992, guid: 9f05f34b64e30f54a84491562235e1a1, type: 3}
+  m_PrefabInstance: {fileID: 1761334951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1cc854d098812429d3552b4f453dd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &159894520 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4835789832631930, guid: bdf8e7438a7816543998181bd3067573, type: 3}
@@ -11282,6 +11293,7 @@ MonoBehaviour:
   - {fileID: 979987311}
   _catCount: 5
   _pointsToWin: 5
+  _connectionManager: {fileID: 159041411}
   _gameMusic: {fileID: 1818061348}
   _menuMusic: {fileID: 1818061349}
 --- !u!4 &1818061347

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using CargoAR.Shared.Network;
 using Microsoft.AspNetCore.SignalR.Client;
 using Placuszki.Krakjam2024.Server;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.Events;
 
 namespace Placuszki.Krakjam2024
 {
-    public class ConnectionManager : MonoBehaviour, IGameHub
+    public class ConnectionManager : MonoBehaviour, IGameHub, IClientHub
     {
         public event Action Connected;
         public event Action Disconnected;
@@ -48,13 +49,29 @@ namespace Placuszki.Krakjam2024
         {
             StopConnection();
         }
+        
+        #region GameHub
+        public Task SendUserInfo(UserInfo userInfo)
+        {
+            Debug.Log($"Received UserInfo: {userInfo.PlayerId}");
+            _gameplayServiceConsumer.ConsumeUserInfo(userInfo);
+            return Task.CompletedTask;
+        }
 
         public Task SendDataPacket(DataPacket dataPacket)
         {
             _gameplayServiceConsumer.ConsumeDataPacket(dataPacket);
             return Task.CompletedTask;
         }
+        #endregion
 
+        #region ClientHub
+        public void SendEndGameToServer(UserInfo winningUserInfo)
+        {
+            _connectionManager?.Connection.SendAsync(nameof(IClientHub.SendEndGameToServer), winningUserInfo);
+        }
+        #endregion
+        
         private void StartConnectionCoroutine()
         {
             _startConnectionCoroutine = StartCoroutine(StartConnection());
@@ -123,6 +140,7 @@ namespace Placuszki.Krakjam2024
             _connectionManager.OnDisconnect += Disconnect;
             _connectionManager.ConnectionCallback += OnConnected;
             _connectionManager.Connection.On<DataPacket>(nameof(IGameHub.SendDataPacket), _client.SendDataPacket);
+            _connectionManager.Connection.On<UserInfo>(nameof(IGameHub.SendUserInfo), _client.SendUserInfo);
             _connectionManager.Log += OnLog;
         }
 
@@ -177,7 +195,7 @@ namespace Placuszki.Krakjam2024
         private string GetLocalConnectionString()
         {
             string customServerIp = "localhost";
-            string port = "80";
+            string port = "8080";
             string hub = "hubs/gamehub";
 
             return $"http://{customServerIp}:{port}/{hub}";

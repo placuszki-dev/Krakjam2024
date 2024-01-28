@@ -2,7 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Threading.Tasks;
+using Placuszki.Krakjam2024;
 using Placuszki.Krakjam2024.Server;
+using UnityEditor;
 
 public enum GamePhase
 {
@@ -28,6 +31,7 @@ public class GameManager : MonoBehaviour
 
     #endregion
 
+    public event Action OnMenu;
     public event Action OnStartGame;
     public event Action<string> OnEndGame;
 
@@ -36,7 +40,8 @@ public class GameManager : MonoBehaviour
     public Transform[] _catSpawners;
     public int _catCount = 5;
     public int _pointsToWin = 5;
-
+    public ConnectionManager _connectionManager;
+        
     [Space]
     public AudioSource _gameMusic;
     public AudioSource _menuMusic;
@@ -63,70 +68,111 @@ public class GameManager : MonoBehaviour
                 case GamePhase.Play:
                     StopGame();
                     break;
+                case GamePhase.EndGame:
+                    ShowMenu();
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
         }
     }
 
+    private void ShowMenu()
+    {
+        _gamePhase = GamePhase.Menu;
+        //_ui.SetActive(true);
+        PlayMusic();
+        OnMenu?.Invoke();
+    }
+    
     [ContextMenu("StartGame")]
     public void StartGame()
     {
         _gamePhase = GamePhase.Play;
-        
-        _ui.SetActive(false);
+        //_ui.SetActive(false);
         PlayMusic();
         CreateCats();
+        OnStartGame?.Invoke();
     }
 
     [ContextMenu("StopGame")]
     private void StopGame()
     {
         _gamePhase = GamePhase.Menu;
-        
-        _ui.SetActive(true);
+
+        // _ui.SetActive(true);
         PlayMusic();
         DestroyAllCats();
     }
     
-    private void EndGame()
+    private void EndGame(int winningPlayerIndex)
     {
         _gamePhase = GamePhase.EndGame;
-        
+        OnEndGame?.Invoke(_players.ElementAt(winningPlayerIndex).Key);
+
+        _ui.SetActive(true);
         DestroyAllCats();
         _players.Clear();
         _colors.Clear();
 
         PlayMusic();
+        
+        UserInfo userInfo = new UserInfo()
+        {
+            CheeseType = 0,
+            PhoneColor = "TODO",
+            PlayerId = "TODO",
+        };
+        
+        SendEndGameToServer(userInfo);
+    }
+   
+    private void SendEndGameToServer(UserInfo userInfo)
+    {
+        _connectionManager.SendEndGameToServer(userInfo);
+    }
+     
+    [ContextMenu("DebugSendEndGameToServer")]
+    private void DebugSendEndGameToServer()
+    {
+        UserInfo userInfo = new UserInfo()
+        {
+            CheeseType = 0,
+            PhoneColor = "TODO",
+            PlayerId = "TODO",
+        };
+        _connectionManager.SendEndGameToServer(userInfo);
     }
     
     private void PlayMusic()
     {
         switch (_gamePhase)
         {
-            case GamePhase.Menu:
-                _gameMusic?.Stop();
-                _menuMusic?.Play();
-                break;
             case GamePhase.Play:
                 _gameMusic?.Play();
                 _menuMusic?.Stop();
                 break;
+            case GamePhase.Menu:
+            case GamePhase.EndGame:
+                _gameMusic?.Stop();
+                _menuMusic?.Play();
+                break;
+                
             default:
                 throw new ArgumentOutOfRangeException();
         }
     }
 
-    public void RegisterPlayer(DataPacket dataPacket)
+    public void RegisterPlayer(UserInfo userInfo)
     {
-        _players.TryAdd(dataPacket.PlayerId, 0);
-        _colors.TryAdd(dataPacket.PlayerId, dataPacket.PhoneColor);
+        _players.TryAdd(userInfo.PlayerId, 0);
+        _colors.TryAdd(userInfo.PlayerId, userInfo.PhoneColor);
     }
 
-    public void DeregisterPlayer(string id)
+    public void DeregisterPlayer(UserInfo userInfo)
     {
-        _players.Remove(id);
-        _colors.Remove(id);
+        _players.Remove(userInfo.PlayerId);
+        _colors.Remove(userInfo.PlayerId);
     }
 
     private void CreateCats()
@@ -186,8 +232,7 @@ public class GameManager : MonoBehaviour
         {
             if (_players.ElementAt(i).Value >= _pointsToWin)
             {
-                OnEndGame?.Invoke(_players.ElementAt(i).Key);
-                EndGame();
+                EndGame(i);
                 return true;
             }
         }

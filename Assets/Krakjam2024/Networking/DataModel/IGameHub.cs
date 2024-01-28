@@ -6,5 +6,6 @@ namespace Placuszki.Krakjam2024.Server
     public interface IGameHub
     {
         Task SendDataPacket(DataPacket dataPacket);
+        Task SendUserInfo(UserInfo userInfo);
     }
 }
