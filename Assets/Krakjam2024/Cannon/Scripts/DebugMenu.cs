@@ -47,7 +47,7 @@ public class DebugMenu : MonoBehaviour
         var randomPlayer = FindObjectsOfType<Player>().ToList<Player>().GetRandomElement();
         DataPacket dp = new DataPacket()
         {
-            PlayerId = "Bolo",
+            PlayerId = "DebugUser",
             X = Random.Range(-0.5f, 0.5f),
             Y = Random.Range(0.5f, 1),
         };
