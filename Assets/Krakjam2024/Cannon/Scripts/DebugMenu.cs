@@ -35,9 +35,9 @@ public class DebugMenu : MonoBehaviour
     {
         var userInfo = new UserInfo()
         {
-            PlayerId = "Bolo",
+            PlayerId = "DebugUser",
             PhoneColor = "#ff0000",
-            CheeseType = 0,
+            CheeseType = 1,
         };
         FindObjectOfType<DataPacketHandler>().HandleUserInfo(userInfo);
     }
