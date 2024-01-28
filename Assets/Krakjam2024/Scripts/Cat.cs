@@ -5,6 +5,7 @@ using Placuszki.Krakjam2024;
 using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Cat : MonoBehaviour
@@ -19,6 +20,7 @@ public class Cat : MonoBehaviour
     public Sprite[] _catSprites;
     public Material[] _catMAt;
     public SkinnedMeshRenderer _catRenderer;
+    [FormerlySerializedAs("_ramkaImage")] public Image _catBubbleRamkaImage;
 
     public AudioSource _catAudio;
     public AudioClip[] _catClip;
@@ -39,18 +41,13 @@ public class Cat : MonoBehaviour
 
     Vector3 destination;
 
-    [ContextMenu("hit")]
-    void TestHit()
-    {
-        Hit("1", CheeseType.Gouda);
-    }
-
-    public void Hit(string playerID, CheeseType cheeseType)
+    public void Hit(string playerID, CheeseType cheeseType, Color playerColor)
     {
         if (_alreadyHit)
             return;
         
         _alreadyHit = true;
+
 
         if (_showCheeseOnFace)
         {
@@ -74,6 +71,7 @@ public class Cat : MonoBehaviour
         _agent.speed = 0;
         _catBubble.gameObject.SetActive(true);
         _catBubble.transform.DOScale(Vector3.one, 1f).SetEase(Ease.OutElastic);
+        _catBubbleRamkaImage.color = playerColor;
         _animator.SetFloat("speed", 0);
         _animator.SetTrigger("stop");
         _catFaceImage.sprite = _catSprites[UnityEngine.Random.Range(0, _catSprites.Length)];

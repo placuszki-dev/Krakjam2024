@@ -113,6 +113,10 @@ namespace Placuszki.Krakjam2024
         public string GetPlayerId()
         {
             return _player.GetPlayerId();
+        }  
+        public Color GetPlayerColor()
+        {
+            return _player.GetPlayerColor();
         }
     }
 

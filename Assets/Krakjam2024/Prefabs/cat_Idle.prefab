@@ -3026,10 +3026,12 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 85e786a6c77d02a43871701ee9cf69d8, type: 2}
   - {fileID: 2100000, guid: 55473443ceaca2b4f973441a80a8ef73, type: 2}
   _catRenderer: {fileID: 2669142087111044486}
+  _catBubbleRamkaImage: {fileID: 8021580634493408505}
   _catAudio: {fileID: 8880254957756865497}
   _catClip:
   - {fileID: 8300000, guid: c0f99521c7398124ebae989f05bfaaae, type: 3}
   - {fileID: 8300000, guid: 716f0e2e017211144a939c1988087ec8, type: 3}
+  _showCheeseOnFace: 1
   _goudaOnFace: {fileID: 8934348280985627822}
   _cheddarOnFace: {fileID: 2741189576893261920}
   _animator: {fileID: 2178382304523723172}
@@ -3738,7 +3740,7 @@ GameObject:
   - component: {fileID: 8530804771852434009}
   - component: {fileID: 8021580634493408505}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Ramka
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3784,7 +3786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 1}
+  m_Color: {r: 0.98823535, g: 0.87843144, b: 0.45098042, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

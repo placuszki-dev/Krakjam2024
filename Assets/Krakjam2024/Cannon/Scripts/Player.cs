@@ -98,6 +98,11 @@ namespace Placuszki.Krakjam2024
         {
             return UserInfo.PlayerId;
         }
+        
+        public Color GetPlayerColor()
+        {
+            return ColorParser.HexToColor(UserInfo.PhoneColor);
+        }
 
         public void SetupPlayer(UserInfo userInfo)
         {
