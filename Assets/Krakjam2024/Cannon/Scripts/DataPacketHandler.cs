@@ -38,10 +38,12 @@ namespace Placuszki.Krakjam2024
             Player player = FindObjectsOfType<Player>().FirstOrDefault(p => p.GetPlayerId().Equals(playerId));
             if (player == null)
             {
-                Debug.LogError($"Received data packet with owner of non existing player: {dataPacket.PlayerId}");
+                Debug.Log($"Received data packet with owner of non existing player: {dataPacket.PlayerId}. Ignoring it.");
             }
-
-            player.HandleDataPacket(dataPacket);
+            else
+            {
+                player.HandleDataPacket(dataPacket);
+            }
         }
 
         private Player CreatePlayer(UserInfo userInfo)
