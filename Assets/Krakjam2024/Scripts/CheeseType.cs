@@ -2,6 +2,7 @@
 {
     public enum CheeseType
     {
+        Unknown = 0,
         Gouda = 1,
         Cheddar = 2,
     }

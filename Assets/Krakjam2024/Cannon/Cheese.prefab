@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 9006187981667528558}
+  _meshRenderer: {fileID: 1181378731480728822}
   _inputVectorYClampMin: 0.1
   _inputVectorsClampMax: 1
   _xMultiplier: 100
@@ -174,6 +175,8 @@ MonoBehaviour:
     Drag: 20
   _destroyDelay: 1.5
   _collisionParticle: {fileID: 193104, guid: c2f28a236b0696a4f90a994422019577, type: 3}
+  _goudaMaterial: {fileID: 2100000, guid: aeea10ebce4b7ed419dbb4f13bc19434, type: 2}
+  _cheddarMaterial: {fileID: 2100000, guid: 01d5a1faa2b617b4397434645d2ec9c3, type: 2}
 --- !u!54 &9006187981667528558
 Rigidbody:
   m_ObjectHideFlags: 0

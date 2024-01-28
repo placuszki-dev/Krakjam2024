@@ -57,13 +57,14 @@ namespace Placuszki.Krakjam2024
 
         private void Shoot(float x, float y)
         {
+            CheeseType cheeseType = (CheeseType) UserInfo.CheeseType;
             PlayShootAnimation(x, y);
             Cheese cheese = Instantiate(_cheesePrefab, _launcherTransform);
             
             cheese.transform.localPosition = Vector3.zero;
             cheese.transform.localRotation = Quaternion.identity;
-            
-            cheese.Launch(this, x, y);
+
+            cheese.Launch(this, x, y, cheeseType);
             _cooldownLeft = _cooldown;
         }
 
@@ -94,7 +95,6 @@ namespace Placuszki.Krakjam2024
         public void SetupPlayer(UserInfo userInfo)
         {
             UserInfo = userInfo;
-            
             SetColor(userInfo.PhoneColor);
         }
     }

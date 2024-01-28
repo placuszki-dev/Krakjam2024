@@ -10,6 +10,7 @@ namespace Placuszki.Krakjam2024
 
         [Header("References")] 
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private MeshRenderer _meshRenderer;
 
         [Header("Settings - trajectory")]
         [SerializeField] private float _inputVectorYClampMin = 0.1f;
@@ -25,11 +26,29 @@ namespace Placuszki.Krakjam2024
 
         [Header("Particle")]
         public GameObject _collisionParticle;
+        
+        [Header("Materials")]
+        public Material _goudaMaterial;
+        public Material _cheddarMaterial;
 
         private Player _player;
 
-        public void Launch(Player player, float xVector, float yVector)
+        public void Launch(Player player, float xVector, float yVector, CheeseType cheeseType)
         {
+            switch (cheeseType)
+            {
+                case CheeseType.Unknown:
+                    _meshRenderer.material = _goudaMaterial;
+                    break;
+                case CheeseType.Gouda:
+                    _meshRenderer.material = _goudaMaterial;
+                    break;
+                case CheeseType.Cheddar:
+                    _meshRenderer.material = _cheddarMaterial;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(cheeseType), cheeseType, null);
+            }
             _player = player;
             // Force
             xVector = Mathf.Clamp(xVector, -_inputVectorsClampMax, _inputVectorsClampMax);
