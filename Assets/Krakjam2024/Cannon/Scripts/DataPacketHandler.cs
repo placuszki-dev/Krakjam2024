@@ -42,6 +42,7 @@ namespace Placuszki.Krakjam2024
             }
             else
             {
+                Debug.Log($"Received valid data packet: {dataPacket.PlayerId}, {dataPacket.X}, {dataPacket.Y}.");
                 player.HandleDataPacket(dataPacket);
             }
         }
