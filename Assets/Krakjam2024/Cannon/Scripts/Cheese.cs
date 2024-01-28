@@ -78,6 +78,12 @@ namespace Placuszki.Krakjam2024
             {
                 IsDeadly = false;
             }
+            
+            var cheese = other.gameObject.GetComponent<Cheese>();
+            if (cheese)
+            {
+                return; 
+            }
 
             SetRigidbodyValuesAfterCollision(other);
             Destroy(gameObject, _destroyDelay);
