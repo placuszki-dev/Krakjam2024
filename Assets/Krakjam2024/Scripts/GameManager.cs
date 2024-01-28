@@ -31,13 +31,13 @@ public class GameManager : MonoBehaviour
 
     public event Action OnMenu;
     public event Action OnStartGame;
-    public event Action<UserInfo> OnEndGame;
+    public event Action<CheeseType> OnEndGame;
 
     public GameObject _ui;
     public GameObject _catprefab;
     public Transform[] _catSpawners;
     public int _catCount = 5;
-    public int _pointsToWin = 5;
+    public int _pointsToWin = 10;
     public ConnectionManager _connectionManager;
         
     [Space]
@@ -120,10 +120,10 @@ public class GameManager : MonoBehaviour
         SendMainMenuOpenedEndGameToServer();
     }
 
-    private void EndGame(Player winner)
+    private void EndGame(CheeseType cheeseType)
     {
         SetPhase(GamePhase.EndGame);
-        OnEndGame?.Invoke(winner.UserInfo);
+        OnEndGame?.Invoke(cheeseType);
 
         _ui.SetActive(true);
         DestroyAllCats();
@@ -131,37 +131,12 @@ public class GameManager : MonoBehaviour
 
         PlayMusic();
         
-        UserInfo userInfo = new UserInfo()
-        {
-            CheeseType = 0,
-            PhoneColor = "TODO",
-            PlayerId = "TODO",
-        };
-        
-        SendEndGameToServer(userInfo);
+        SendEndGameToServer(cheeseType);
     }
    
-    private void SendEndGameToServer(UserInfo userInfo)
+    private void SendEndGameToServer(CheeseType cheeseType)
     {
-        _connectionManager.SendEndGameToServer(userInfo);
-    }
-
-    [ContextMenu("DebugSendEndGameToServer")]
-    private void DebugSendEndGameToServer()
-    {
-        UserInfo userInfo = new UserInfo()
-        {
-            CheeseType = 0,
-            PhoneColor = "TODO",
-            PlayerId = "TODO",
-        };
-        _connectionManager.SendEndGameToServer(userInfo);
-    }
-    
-    [ContextMenu("DebugSendMainMenuOpenedEndGameToServer")]
-    private void DebugSendMainMenuOpenedEndGameToServer()
-    {
-        _connectionManager.SendMainMenuOpenedToServer();
+        _connectionManager.SendEndGameToServer((int)cheeseType);
     }
     
     private void SendMainMenuOpenedEndGameToServer()
@@ -250,21 +225,43 @@ public class GameManager : MonoBehaviour
         Player player = _players.FirstOrDefault(p => p.UserInfo.PlayerId.Equals(playerID));
         player.Points++;
 
-        if (!CheckIfSomeoneWin())
+        if (!CheckIfSomeTeamWon())
         {
             CreateCat();
         }
     }
 
-    private bool CheckIfSomeoneWin()
+    private bool CheckIfSomeTeamWon()
     {
+        int cheddarPoints = 0;
+        int goudaPoints = 0;
         foreach (var player in _players)
         {
-            if (player.Points >= _pointsToWin)
+            int points = player.Points;
+            CheeseType cheeseType = (CheeseType) player.UserInfo.CheeseType;
+            switch (cheeseType)
             {
-                EndGame(player);
-                return true;
+                case CheeseType.Gouda:
+                    goudaPoints += points;
+                    break;
+                case CheeseType.Cheddar:
+                    cheddarPoints += points;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
+        }
+
+        if (cheddarPoints >= _pointsToWin)
+        {
+            EndGame(CheeseType.Cheddar);
+            return true;
+        }
+        
+        if (goudaPoints >= _pointsToWin)
+        {
+            EndGame(CheeseType.Gouda);
+            return true;
         }
 
         return false;

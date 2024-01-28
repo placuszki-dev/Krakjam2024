@@ -4,7 +4,7 @@ namespace CargoAR.Shared.Network
 {
     public interface IClientHub
     {
-        void SendEndGameToServer(UserInfo winner);
+        void SendEndGameToServer(int winningCheeseType);
         void SendMainMenuOpenedToServer();
     }
 }
