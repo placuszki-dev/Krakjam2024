@@ -11311,6 +11311,10 @@ PrefabInstance:
       propertyPath: _cat
       value: 
       objectReference: {fileID: 8659772079310553788}
+    - target: {fileID: 3101663720187866525, guid: daaca5402f6ec3045b1bfb6ae1cad0b7, type: 3}
+      propertyPath: _cat
+      value: 
+      objectReference: {fileID: 8659772079310553788}
     - target: {fileID: 3298960187115831902, guid: daaca5402f6ec3045b1bfb6ae1cad0b7, type: 3}
       propertyPath: m_Name
       value: CheeseDamageReceiver
