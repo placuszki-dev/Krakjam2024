@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     public Transform[] _catSpawners;
     public int _catCount = 5;
     public int _pointsToWin = 10;
-    public ConnectionManager _connectionManager;
+    // public ConnectionManager _connectionManager;
         
     [Space]
     public AudioSource _gameMusic;
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        _connectionManager.Connected += ShowMenu;
+        // _connectionManager.Connected += ShowMenu;
     }
 
     private void Update()
@@ -147,12 +147,12 @@ public class GameManager : MonoBehaviour
    
     private void SendEndGameToServer(CheeseType cheeseType)
     {
-        _connectionManager.SendEndGameToServer((int)cheeseType);
+        // _connectionManager.SendEndGameToServer((int)cheeseType);
     }
     
     private void SendMainMenuOpenedEndGameToServer()
     {
-        _connectionManager.SendMainMenuOpenedToServer();
+        // _connectionManager.SendMainMenuOpenedToServer();
     }
 
     private void PlayMusic()
@@ -238,7 +238,7 @@ public class GameManager : MonoBehaviour
         player.Points++;
         player.SetPlayerScoreText(player.Points); // xd refactor this shit
 
-        _connectionManager.VibratePhone(playerID, player.Points);
+        // _connectionManager.VibratePhone(playerID, player.Points);
         
         if (!UpdateScore())
         {

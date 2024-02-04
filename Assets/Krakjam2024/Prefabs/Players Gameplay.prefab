@@ -444,61 +444,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 757641780578288813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7427449722862743468
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4150449303915755781}
-  - component: {fileID: 1842928450163935992}
-  m_Layer: 0
-  m_Name: ConnectionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4150449303915755781
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7427449722862743468}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 5389596417541449181}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1842928450163935992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7427449722862743468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b1cc854d098812429d3552b4f453dd4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ConnectingEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  ConnectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  DisconnectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _gameplayServiceConsumer: {fileID: 5251818267995361880}
-  _useLocalhost: 0
 --- !u!1 &8160119619471190812
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,6 +515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5389596417541449181}
+  - component: {fileID: 7656038314922040339}
   m_Layer: 0
   m_Name: Players Gameplay
   m_TagString: Untagged
@@ -590,9 +536,51 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4150449303915755781}
   - {fileID: 154137788945661302}
   - {fileID: 7228696051696051586}
   - {fileID: 757641780578288813}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7656038314922040339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8840141935122251096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c07b0b6d4ed24e644aa6b592310c7de2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPrefab: {fileID: 8064987060494571372, guid: 71e4daa945792b24ca6e80c2874402ac, type: 3}
+  OnStarted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReconnecting:
+    m_PersistentCalls:
+      m_Calls: []
+  OnReconnected:
+    m_PersistentCalls:
+      m_Calls: []
+  OnClosed:
+    m_PersistentCalls:
+      m_Calls: []
+  OnError:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotification:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGameUpdate:
+    m_PersistentCalls:
+      m_Calls: []
+  OnYouJoinedGame:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNewPlayerJoinGame:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAPlayerLeftGame:
+    m_PersistentCalls:
+      m_Calls: []
