@@ -11,13 +11,15 @@ const GameConnection = {
     NotificationCallbackName: "",
     JoinGameCallbackName: "",
     NewPlayerJoinGameCallbackName: "",
+    SendUserInfoCallbackName: "",
+    SendDataPacketCallbackName: "",
     APlayerLeftZoneCallbackName: "",
     GameUpdateCallbackName: "",
 };
 
 function startConnection(url, gameObjectName, startCallbackName, errorCallbackName,
     reconnectingCallbackName, reconnectedCallbackName, closeCallbackName, notificationCallbackName,
-    joinGameCallbackName, newPlayerJoinGameCallbackName, aPlayerLeftZoneCallbackName, gameUpdateCallbackName) {
+    joinGameCallbackName, newPlayerJoinGameCallbackName, aPlayerLeftZoneCallbackName, gameUpdateCallbackName, sendUserInfoCallbackName, sendDataPacketCallbackName) {
 
     GameConnection.URL = UTF8ToString(url);
     GameConnection.GameObjectName = UTF8ToString(gameObjectName);
@@ -29,6 +31,8 @@ function startConnection(url, gameObjectName, startCallbackName, errorCallbackNa
     GameConnection.NotificationCallbackName = UTF8ToString(notificationCallbackName);
     GameConnection.JoinGameCallbackName = UTF8ToString(joinGameCallbackName);
     GameConnection.NewPlayerJoinGameCallbackName = UTF8ToString(newPlayerJoinGameCallbackName);
+    GameConnection.SendUserInfoCallbackName = UTF8ToString(sendUserInfoCallbackName);
+    GameConnection.SendDataPacketCallbackName = UTF8ToString(sendDataPacketCallbackName);
     GameConnection.APlayerLeftZoneCallbackName = UTF8ToString(aPlayerLeftZoneCallbackName);
     GameConnection.GameUpdateCallbackName = UTF8ToString(gameUpdateCallbackName);
 
@@ -69,7 +73,17 @@ function startConnection(url, gameObjectName, startCallbackName, errorCallbackNa
         function (world) {
             Game.SendMessage(GameConnection.GameObjectName, GameConnection.GameUpdateCallbackName, JSON.stringify(world));
         });
-
+    
+    GameConnection.SignalrConnection.on("SendUserInfo",
+        function (userInfo) {
+            Game.SendMessage(GameConnection.GameObjectName, GameConnection.SendUserInfoCallbackName, JSON.stringify(userInfo));
+        });
+        
+        GameConnection.SignalrConnection.on("SendDataPacket",
+            function (dataPacket) {
+                Game.SendMessage(GameConnection.GameObjectName, GameConnection.SendDataPacketCallbackName, JSON.stringify(dataPacket));
+            });
+    
     GameConnection.SignalrConnection.start().then(async function () {
         Game.SendMessage(GameConnection.GameObjectName, GameConnection.StartCallbackName, GameConnection.SignalrConnection.connectionId);
     }).catch(function (error) {
@@ -99,6 +113,24 @@ async function sendMessageToAll(message) {
     });
 }
 
+async function sendToServerMainMenuOpened() {
+    await GameConnection.SignalrConnection.invoke("MainMenuOpened").catch(function (error) {
+        Game.SendMessage(GameConnection.GameObjectName, GameConnection.ErrorCallbackName, error);
+    });
+}
+
+async function sendToServerEndGame(winningCheeseType) {
+    await GameConnection.SignalrConnection.invoke("EndGame", winningCheeseType).catch(function (error) {
+        Game.SendMessage(GameConnection.GameObjectName, GameConnection.ErrorCallbackName, error);
+    });
+}
+
+async function sendToServerVibratePhone(playerID, playerPoints) {
+    await GameConnection.SignalrConnection.invoke("VibratePhone", playerID, playerPoints).catch(function (error) {
+        Game.SendMessage(GameConnection.GameObjectName, GameConnection.ErrorCallbackName, error);
+    });
+}
+
 async function move(x, y, z, lookY) {
     await GameConnection.SignalrConnection.invoke("Move", x, y, z, lookY).catch(function (error) {
         Game.SendMessage(GameConnection.GameObjectName, GameConnection.ErrorCallbackName, error);
@@ -111,6 +143,9 @@ const GameConnectionLib = {
     joinGame,
     leaveGame,
     sendMessageToAll,
+    sendToServerVibratePhone,
+    sendToServerEndGame,
+    sendToServerMainMenuOpened,
     move
 };
 autoAddDeps(GameConnectionLib, '$GameConnection');

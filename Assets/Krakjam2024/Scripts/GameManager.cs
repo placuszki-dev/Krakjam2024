@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Placuszki.Krakjam2024;
+using WebglExample;
+using Player = Placuszki.Krakjam2024.Player;
 
 public enum GamePhase
 {
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
     public Transform[] _catSpawners;
     public int _catCount = 5;
     public int _pointsToWin = 10;
-    // public ConnectionManager _connectionManager;
+    public SignalrConnection _connectionManager;
         
     [Space]
     public AudioSource _gameMusic;
@@ -57,7 +59,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // _connectionManager.Connected += ShowMenu;
+        _connectionManager.OnStarted.AddListener(ShowMenu);
     }
 
     private void Update()
@@ -73,7 +75,7 @@ public class GameManager : MonoBehaviour
                     // do nothing
                     break;
                 case GamePhase.EndGame:
-                    ShowMenu();
+                    ShowMenu("TODO");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -85,13 +87,14 @@ public class GameManager : MonoBehaviour
             if (_gamePhase == GamePhase.Play)
             {
                 StopGame();
-                ShowMenu();
+                ShowMenu("TODO");
             }
         }
     }
 
-    private void ShowMenu()
+    private void ShowMenu(string id)
     {
+        Debug.Log($"Started: {id}");
         SetPhase(GamePhase.Menu);
         DestroyAllPlayers();
         _goudaScorePanel.SetScore(0, _pointsToWin);
@@ -147,12 +150,12 @@ public class GameManager : MonoBehaviour
    
     private void SendEndGameToServer(CheeseType cheeseType)
     {
-        // _connectionManager.SendEndGameToServer((int)cheeseType);
+        _connectionManager.SendToServerEndGame((int)cheeseType);
     }
     
     private void SendMainMenuOpenedEndGameToServer()
     {
-        // _connectionManager.SendMainMenuOpenedToServer();
+        _connectionManager.SendToServerMainMenuOpened();
     }
 
     private void PlayMusic()
@@ -238,7 +241,7 @@ public class GameManager : MonoBehaviour
         player.Points++;
         player.SetPlayerScoreText(player.Points); // xd refactor this shit
 
-        // _connectionManager.VibratePhone(playerID, player.Points);
+        _connectionManager.SendToServerVibratePhone(playerID, player.Points);
         
         if (!UpdateScore())
         {

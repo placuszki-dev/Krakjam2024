@@ -1,9 +1,9 @@
-using AOT;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using Placuszki.Krakjam2024;
+using Placuszki.Krakjam2024.Server;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -13,6 +13,7 @@ namespace WebglExample
     {
         private static bool _connected = false;
 
+        public GameplayServiceConsumer _gameplayServiceConsumer;
         public GameObject PlayerPrefab;
         public UnityEvent<string> OnStarted;
         public UnityEvent<string> OnReconnecting;
@@ -26,7 +27,7 @@ namespace WebglExample
         public UnityEvent<string> OnAPlayerLeftGame;
         public bool Connected => _connected;
 
-        private const string _URL = "http://192.168.0.115:5004/GameHub";
+        private const string _URL = "http://192.168.0.115:8080/GameHub";
         private string _myId = "";
         private List<NetworkPlayer> _networkPlayers = new List<NetworkPlayer>();
 
@@ -43,7 +44,7 @@ namespace WebglExample
             gameObject.name = new Guid().ToString();
             startConnection(_URL, gameObject.name, nameof(Started), nameof(Error),
                 nameof(Reconnecting), nameof(Reconnected), nameof(Closed), nameof(Notification),
-                nameof(YouJoinedGame), nameof(NewPlayerJoinGame), nameof(APlayerLeftGame), nameof(GameUpdate));
+                nameof(YouJoinedGame), nameof(NewPlayerJoinGame), nameof(APlayerLeftGame), nameof(GameUpdate), nameof(SendUserInfo), nameof(SendDataPacket));
             if (Debug.isDebugBuild)
             {
                 Debug.Log("starting with name " + name);
@@ -90,6 +91,7 @@ namespace WebglExample
                 }
             }
         }
+        
         //Callbacks
         private void Started(string id)
         {
@@ -191,9 +193,47 @@ namespace WebglExample
                 }
             }
         }
+        
+        public void SendUserInfo(string userInfoJson)
+        {
+            Debug.Log("SendUserInfo: " + userInfoJson);
+            var userInfo = JsonUtility.FromJson<UserInfo>(userInfoJson);
+            Debug.Log("ID: " + userInfo.PlayerId);
+            Debug.Log("CheeseType: " + userInfo.CheeseType);
+            Debug.Log("PhoneColor: " + userInfo.PhoneColor);
+            _gameplayServiceConsumer.ConsumeUserInfo(userInfo);
+        }
+        
+        public void SendDataPacket(string dataPacketJson)
+        {
+            Debug.Log("SendDataPacket: " + dataPacketJson);
+            var dataPacket = JsonUtility.FromJson<DataPacket>(dataPacketJson); 
+            Debug.Log("playerId: " + dataPacket.PlayerId);
+            Debug.Log("x: " + dataPacket.X);
+            Debug.Log("x: " + dataPacket.Y); // TODO: dekodowane JSONa nie działa w ogóle, napraw
+            _gameplayServiceConsumer.ConsumeDataPacket(dataPacket);
+        }
+        
         private void OnApplicationQuit()
         {
             LeaveGame();
+        }
+        
+        public void SendToServerMainMenuOpened()
+        {
+            Debug.Log("SendToServerMainMenuOpened");
+            sendToServerMainMenuOpened();
+        }
+        
+        public void SendToServerEndGame(int winningCheeseType)
+        {
+            Debug.Log("SendToServerEndGameOpened");
+            sendToServerEndGame(winningCheeseType);
+        }
+        public void SendToServerVibratePhone(string playerID, int playerPoints)
+        {
+            Debug.Log("SendToServerEndGameOpened");
+            sendToServerVibratePhone(playerID, playerPoints);
         }
 
         DateTime _lastUpdateLog = DateTime.Now;
@@ -208,9 +248,15 @@ namespace WebglExample
         [DllImport("__Internal")]
         private static extern void move(float x, float y, float z, float lookY);
         [DllImport("__Internal")]
+        private static extern void sendToServerMainMenuOpened();
+        [DllImport("__Internal")]
+        private static extern void sendToServerEndGame(int winningCheeseType);
+        [DllImport("__Internal")]
+        private static extern void sendToServerVibratePhone(string playerID, int playerPoints);
+        [DllImport("__Internal")]
         private static extern void startConnection(string url, string gameObjectName, string startCallbackName,
             string errorCallbackName, string reconnectingCallbackName, string reconnectedCallbackName,
             string closeCallbackName, string notificationCallbackName, string joinGameCallbackName,
-            string newPlayerJoinGameCallbackName, string aPlayerLeftZoneCallbackName, string gameUpdateCallbackName);
+            string newPlayerJoinGameCallbackName, string aPlayerLeftZoneCallbackName, string gameUpdateCallbackName, string sendUserInfoCallbackName, string sendDataPacketCallbackName);
     }
 }

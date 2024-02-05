@@ -8323,6 +8323,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7656038314922040339, guid: 9f05f34b64e30f54a84491562235e1a1, type: 3}
+      propertyPath: _gameplayServiceConsumer
+      value: 
+      objectReference: {fileID: 1808513422}
     - target: {fileID: 8840141935122251096, guid: 9f05f34b64e30f54a84491562235e1a1, type: 3}
       propertyPath: m_Name
       value: Players Gameplay
@@ -8610,6 +8614,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4372973593729692, guid: 491dc122236ad9749a046177ea69736d, type: 3}
   m_PrefabInstance: {fileID: 1805257998}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808513422 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5251818267995361880, guid: 9f05f34b64e30f54a84491562235e1a1, type: 3}
+  m_PrefabInstance: {fileID: 1761334951}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 006bad12d846419c8c9b5e538514f38a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1810667095 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5996078966154666832, guid: cef68888e42d8d843b061c8cd35dba1c, type: 3}
@@ -8728,6 +8743,7 @@ MonoBehaviour:
   - {fileID: 979987311}
   _catCount: 5
   _pointsToWin: 20
+  _connectionManager: {fileID: 1712503093}
   _gameMusic: {fileID: 1818061348}
   _menuMusic: {fileID: 1818061349}
   _applauseSFX: {fileID: 1818061350}

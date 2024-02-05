@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +16,7 @@ namespace WebglExample
         public SignalrConnection Connection;
         void Start()
         {
+            Name.text = Guid.NewGuid().ToString();
             Connection.OnStarted.AddListener((id) =>
             {
                 Connection.JoinGame(Name.text, GameId.text);
