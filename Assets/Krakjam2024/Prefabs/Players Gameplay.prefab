@@ -277,6 +277,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006bad12d846419c8c9b5e538514f38a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &4336633303163310143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3291010560719573799}
+  - component: {fileID: 6184496835950240247}
+  m_Layer: 0
+  m_Name: JoinServer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3291010560719573799
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336633303163310143}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 305.2338, y: 393.1713, z: -6.1535225}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5389596417541449181}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6184496835950240247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4336633303163310143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb97cb84576fef64ab3b74a736338d4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Connection: {fileID: 7656038314922040339}
 --- !u!1 &4835984310963946784
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +584,7 @@ Transform:
   - {fileID: 154137788945661302}
   - {fileID: 7228696051696051586}
   - {fileID: 757641780578288813}
+  - {fileID: 3291010560719573799}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7656038314922040339
@@ -553,6 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07b0b6d4ed24e644aa6b592310c7de2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameplayServiceConsumer: {fileID: 5251818267995361880}
   PlayerPrefab: {fileID: 8064987060494571372, guid: 71e4daa945792b24ca6e80c2874402ac, type: 3}
   OnStarted:
     m_PersistentCalls:
