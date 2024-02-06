@@ -5,8 +5,8 @@ namespace Placuszki.Krakjam2024.Server
     [Serializable]
     public class UserInfo
     {
-        public string PlayerId { get; set; }
-        public string PhoneColor { get; set; }
-        public int CheeseType { get; set; }
+        public string PlayerId;
+        public string PhoneColor;
+        public int CheeseType;
     }
 }
