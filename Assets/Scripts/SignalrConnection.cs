@@ -27,7 +27,7 @@ namespace WebglExample
         public UnityEvent<string> OnAPlayerLeftGame;
         public bool Connected => _connected;
 
-        private const string _URL = "http://217.182.74.11:8080/GameHub";
+        private const string _URL = "https://217.182.74.11:8080/GameHub";
         private string _myId = "";
         private List<NetworkPlayer> _networkPlayers = new List<NetworkPlayer>();
 
