@@ -10,7 +10,7 @@ Anyone can join using only a smartphone with web browser. Smartphones are used a
 Smartphone is used as a controller for the game. Up to 12 players at a time.
 
 ### Tech info
-* Game server made with ASP.NET Core. Communication made with SignalR. We host it on some cheap VPS.
+* Game server made with ASP.NET Core. Communication made with SignalR. We host it on some cheap VPS.
 * Game controller running on player's smartphone made with with vanilla HTML + CSS + JavaScript.
 * Game client made with Unity.
 
