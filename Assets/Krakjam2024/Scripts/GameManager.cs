@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Placuszki.Krakjam2024;
+using UnityEngine.UI;
 using WebglExample;
 using Player = Placuszki.Krakjam2024.Player;
 
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
     public event Action<CheeseType> OnEndGame;
 
     public GameObject _ui;
+    public Button _spaceButton;
     public GameObject _catprefab;
     public Transform[] _catSpawners;
     public int _catCount = 5;
@@ -53,33 +55,19 @@ public class GameManager : MonoBehaviour
     private List<Cat> _activeCats = new List<Cat>();
     private readonly List<Player> _players = new ();
     
-    
-    
     private GamePhase _gamePhase;
 
     private void Start()
     {
         _connectionManager.OnStarted.AddListener(ShowMenu);
+        _spaceButton.onClick.AddListener(OnSpaceClicked);
     }
 
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            switch (_gamePhase)
-            {
-                case GamePhase.Menu:
-                    StartGame();
-                    break;
-                case GamePhase.Play:
-                    // do nothing
-                    break;
-                case GamePhase.EndGame:
-                    ShowMenu("TODO");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            OnSpaceClicked();
         }
 
         if (Input.GetKeyUp(KeyCode.Escape))
@@ -89,6 +77,24 @@ public class GameManager : MonoBehaviour
                 StopGame();
                 ShowMenu("TODO");
             }
+        }
+    }
+
+    private void OnSpaceClicked()
+    {
+        switch (_gamePhase)
+        {
+            case GamePhase.Menu:
+                StartGame();
+                break;
+            case GamePhase.Play:
+                // do nothing
+                break;
+            case GamePhase.EndGame:
+                ShowMenu("TODO");
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 
