@@ -19,7 +19,7 @@ Smartphone is used as a controller for the game. Up to 12 players at a time.
 
 ### Screenshoots 
 ![Alt text](screenshots/s1.png?raw=true "screenshots/s1.png")  
-![Alt text](screenshots/s2.jpg?raw=true "screenshots/s2.jpg")  
+![Alt text](screenshots/s2.jpg?raw=true "screenshots/s2.png")  
 ![Alt text](screenshots/s3.png?raw=true "screenshots/s3.png") 
 
 ### Credits
